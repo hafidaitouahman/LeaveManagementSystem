@@ -1,10 +1,10 @@
-package com.leave.pfa;
+package com.leave.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PfaApplicationTests {
+class BackendApplicationTests {
 
 	@Test
 	void contextLoads() {
