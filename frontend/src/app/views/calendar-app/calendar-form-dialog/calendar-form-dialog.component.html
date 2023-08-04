@@ -1,0 +1,133 @@
+<!-- <div class="event-dialog-wrapper">
+    <mat-toolbar matDialogTitle class="mat-primary m-0">
+      <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+        <span class="title dialog-title">{{dialogTitle}}</span>
+        <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+  
+    <div mat-dialog-content class="p-16 m-0">
+  
+      <form name="eventForm"  class="event-form" fxFlex>
+        <div fxLayout="row wrap" fxLayout.lt-sm="column">
+  
+          <div fxFlex="100">
+            <mat-form-field class="full-width">
+              <input 
+              matInput 
+              name="title" 
+              formControlName="title" 
+              placeholder="Title" 
+              required>
+            </mat-form-field>
+          </div>
+  
+          <div fxLayout="row" fxLayout.lt-sm="column" fxFlex="100" formGroupName="color">
+            <mat-form-field fxFlex>
+              <input 
+              matInput 
+              class="color-picker-input" 
+              name="primaryColor" 
+              formControlName="primary" 
+              placeholder="Primary color" 
+              
+              />
+            </mat-form-field>
+            <span fxFlex="16px"></span>
+  
+            <mat-form-field fxFlex>
+              <input 
+              matInput 
+              class="color-picker-input" 
+              name="secondaryColor" 
+              formControlName="secondary" 
+              placeholder="Secondary color"
+              />
+            </mat-form-field>
+          </div>
+  
+          <div fxLayout="row" fxLayout.lt-sm="column" fxFlex="100">
+            <mat-form-field fxFlex>
+              <input 
+              matInput 
+              [matDatepicker]="startDateDP" 
+              placeholder="Start Date" 
+              name="startDate" 
+              formControlName="start">
+              <mat-datepicker-toggle matSuffix [for]="startDateDP"></mat-datepicker-toggle>
+              <mat-datepicker #startDateDP></mat-datepicker>
+            </mat-form-field>
+            <span fxFlex="16px"></span>
+  
+            <mat-form-field fxFlex>
+              <input 
+              matInput 
+              [matDatepicker]="endDateDP" 
+              placeholder="End Date" 
+              name="endDate" 
+              formControlName="end">
+              <mat-datepicker-toggle matSuffix [for]="endDateDP"></mat-datepicker-toggle>
+              <mat-datepicker #endDateDP></mat-datepicker>
+            </mat-form-field>
+          </div>
+  
+          <div fxLayout="column" fxFlex="100">
+            <mat-form-field formGroupName="meta" class="">
+              <input 
+              matInput 
+              name="location" 
+              formControlName="location" 
+              placeholder="Location">
+            </mat-form-field>
+  
+            <mat-form-field formGroupName="meta" class="">
+              <textarea 
+              matInput 
+              formControlName="notes" 
+              placeholder="Notes" 
+              max-rows="4">
+              </textarea>
+            </mat-form-field>
+          </div>
+  
+        </div>
+      </form>
+    </div>
+  
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
+  
+      <button 
+      mat-raised-button 
+      color="primary" 
+      aria-label="SAVE">
+      Save
+      </button>
+  
+      <button 
+      *ngIf="action ==='edit'" 
+      mat-icon-button color="warn" 
+      (click)="dialogRef.close({action: 'delete'})" 
+      aria-label="Delete"
+      matTooltip="Delete">
+        <mat-icon>delete</mat-icon>
+      </button>
+      
+    </div>
+  </div> -->
+  <div class="modal-header">
+    <h4 class="modal-title">Create Event</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- Add your form fields for event details here -->
+    <input type="text" [(ngModel)]="eventTitle" placeholder="Event Title" />
+    <input type="datetime-local" [(ngModel)]="eventStart" />
+    <input type="datetime-local" [(ngModel)]="eventEnd" />
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="createEvent()">Create</button>
+  </div>
