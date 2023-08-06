@@ -1,5 +1,6 @@
 package com.leave.backend.Entities;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -7,13 +8,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import jakarta.persistence.Entity;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Site {
+public class Departement {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
    
@@ -21,7 +22,6 @@ public class Site {
 
     private String name;
 
-
+   
     
-
 }

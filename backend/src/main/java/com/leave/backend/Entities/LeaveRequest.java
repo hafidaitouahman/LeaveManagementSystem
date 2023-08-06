@@ -5,6 +5,19 @@ import java.util.Date;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import jakarta.persistence.Entity;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 
 public class LeaveRequest {
     @Id
@@ -14,42 +27,10 @@ public class LeaveRequest {
     private Date startDate;
     private Date endDate;
     private String status;
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public Date getStartDate() {
-        return startDate;
-    }
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-    public Date getEndDate() {
-        return endDate;
-    }
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public LeaveRequest() {
-    }
-    public LeaveRequest(int id, Date startDate, Date endDate, String status) {
-        this.id = id;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.status = status;
-    }
-    @Override
-    public String toString() {
-        return "LeaveRequest [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", status=" + status
-                + "]";
-    }
+    @ManyToOne
+    private Employe employe;
+    @ManyToOne
+    private LeaveType leaveType;
+
     
 }

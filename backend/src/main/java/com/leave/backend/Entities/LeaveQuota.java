@@ -1,8 +1,20 @@
 package com.leave.backend.Entities;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 
 public class LeaveQuota {
     @Id
@@ -11,34 +23,8 @@ public class LeaveQuota {
     private int id;
     private int year;
     private double quota;
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public int getYear() {
-        return year;
-    }
-    public void setYear(int year) {
-        this.year = year;
-    }
-    public double getQuota() {
-        return quota;
-    }
-    public void setQuota(double quota) {
-        this.quota = quota;
-    }
-    public LeaveQuota() {
-    }
-    public LeaveQuota(int id, int year, double quota) {
-        this.id = id;
-        this.year = year;
-        this.quota = quota;
-    }
-    @Override
-    public String toString() {
-        return "LeaveQuota [id=" + id + ", year=" + year + ", quota=" + quota + "]";
-    }
+    @ManyToOne
+    private Employe employe;
+
 
 }
