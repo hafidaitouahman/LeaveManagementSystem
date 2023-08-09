@@ -30,8 +30,11 @@ public class Organisation {
     private String description;
     @OneToMany(mappedBy="organisation")
     private List<Employe> employes;
+    // @OneToMany
     // private List<Team> teams;
+    // @OneToMany
     // private List<Departement> departements;
+    // @OneToMany
     // private List<Site> sites;
 
 }

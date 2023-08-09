@@ -2,6 +2,10 @@ package com.leave.backend.Entities;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.leave.backend.Entities.Enumeration.Status;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,7 +30,11 @@ public class LeaveRequest {
     private int id;
     private Date startDate;
     private Date endDate;
-    private String status;
+    private Status status;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date creDate;
+    private double duration;
+    private String Comment;
     @ManyToOne
     private Employe employe;
     @ManyToOne
