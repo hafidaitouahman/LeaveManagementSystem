@@ -4,11 +4,12 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.leave.backend.Entities.Enumeration.Status;
+import com.leave.backend.Enumeration.Status;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -35,6 +36,9 @@ public class LeaveRequest {
     private Date creDate;
     private double duration;
     private String Comment;
+    @ManyToOne
+    @JoinColumn(name = "remplacant_id")
+    private Employe remplacant;
     @ManyToOne
     private Employe employe;
     @ManyToOne

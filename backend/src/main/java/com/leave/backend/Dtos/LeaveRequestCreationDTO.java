@@ -1,17 +1,18 @@
 package com.leave.backend.Dtos;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
 @Data
 public class LeaveRequestCreationDTO {
-    private LeaveTypeDTO type;
+    private LeaveTypeDTO leaveType;
     private Date startDate;
     private Date endDate;
-    private List<RhDTO> approvers;
-    private List<RemplacantDTO> remplacants;
-    private List<EmployeDTO> employes;
+    private RhDTO approver;
+    private RemplacantDTO remplacant;
+    private EmployeDTO employe;
     private String comment;
 
 

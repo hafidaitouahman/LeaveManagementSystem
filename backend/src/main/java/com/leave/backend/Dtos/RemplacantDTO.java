@@ -3,5 +3,7 @@ import lombok.Data;
 
 @Data
 public class RemplacantDTO {
+
+
     String name;
 }

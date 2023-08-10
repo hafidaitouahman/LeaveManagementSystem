@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class EmployeDTO {
+ 
     private String name;
-    private List<TeamDTO> teams;
+    private TeamDTO teamDTO;
 }

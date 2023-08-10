@@ -8,7 +8,6 @@ import lombok.Data;
 public class LeaveRequestDTO {
     private String status;
     private String type;
-    // type Date ou String ?? 
     private Date creDate;
     private Date startDate;
     private Date endDate;

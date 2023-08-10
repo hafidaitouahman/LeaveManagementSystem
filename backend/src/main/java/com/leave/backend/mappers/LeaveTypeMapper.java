@@ -13,8 +13,8 @@ public class LeaveTypeMapper {
         return leaveTypeDTO;
     }
     public LeaveType fromLeaveTypeDTO(LeaveTypeDTO leaveTypeDTO){
-    LeaveType leaveType=new LeaveType();
-    BeanUtils.copyProperties(leaveTypeDTO, leaveType);
-    return leaveType;
-}
+        LeaveType leaveType=new LeaveType();
+        BeanUtils.copyProperties(leaveTypeDTO, leaveType);
+        return leaveType;
+    }
 }

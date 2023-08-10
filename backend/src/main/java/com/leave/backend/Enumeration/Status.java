@@ -1,4 +1,4 @@
-package com.leave.backend.Entities.Enumeration;
+package com.leave.backend.Enumeration;
 
 public enum Status {
     Validé,

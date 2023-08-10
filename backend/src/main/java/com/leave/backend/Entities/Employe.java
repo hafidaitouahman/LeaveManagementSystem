@@ -7,7 +7,7 @@ import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.leave.backend.Entities.Enumeration.Role;
+import com.leave.backend.Enumeration.Role;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -51,8 +51,8 @@ public class Employe {
     private Organisation organisation;
     @OneToMany(mappedBy="employe")
     private List<LeaveRequest> leaveRequests;
-    @ManyToMany
-    private List<Team> teams;
+    @ManyToOne
+    private Team teams;
     @OneToMany
     private List<LeaveQuota> leaveQuotas;
 
