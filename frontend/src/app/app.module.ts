@@ -16,15 +16,29 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarFormDialogComponent } from './views/calendar-app/calendar-form-dialog/calendar-form-dialog.component';
 import { SharedMaterialModule } from './shared/shared-material.module';
+import { CreateOrganisationComponent } from './views/organisation-view/create-organisation/create-organisation.component';
+import { OrganisationDetailsComponent } from './views/organisation-view/organisation-details/organisation-details.component';
+import { OrganisationListComponent } from './views/organisation-view/organisation-list/organisation-list.component';
+import { CreateLeaveTypeComponent } from './views/leaveType-view/create-leave-type/create-leave-type.component';
+import { LeaveTypeListComponent } from './views/leaveType-view/leave-type-list/leave-type-list.component';
+import {HttpClientModule} from '@angular/common/http';
+import { UpdateLeaveTypeComponent } from './views/leaveType-view/update-leave-type/update-leave-type.component'
 @NgModule({
   declarations: [
     AppComponent,
     CalendarAppComponent,
     SidenavBarComponent,
     CalendarFormDialogComponent,
+    CreateOrganisationComponent,
+    OrganisationDetailsComponent,
+    OrganisationListComponent,
+    CreateLeaveTypeComponent,
+    LeaveTypeListComponent,
+    UpdateLeaveTypeComponent,
 
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

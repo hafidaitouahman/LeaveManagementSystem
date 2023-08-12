@@ -117,17 +117,29 @@
     </div>
   </div> -->
   <div class="modal-header">
-    <h4 class="modal-title">Create Event</h4>
+    <h4 class="modal-title">Create Leave Request</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <!-- Add your form fields for event details here -->
-    <input type="text" [(ngModel)]="eventTitle" placeholder="Event Title" />
-    <input type="datetime-local" [(ngModel)]="eventStart" />
-    <input type="datetime-local" [(ngModel)]="eventEnd" />
+    <!-- Add your form fields for leave request details here -->
+    <input type="datetime-local" [(ngModel)]="eventStart" placeholder="Start Date" />
+    <input type="datetime-local" [(ngModel)]="eventEnd" placeholder="End Date" />
+    <!-- <textarea [(ngModel)]="comment" placeholder="Comment"></textarea>
+    <select [(ngModel)]="eventType">
+      <option value="sick">Sick Leave</option>
+      <option value="vacation">Vacation Leave</option>
+      <option value="other">Other</option>
+    </select>
+    <select [(ngModel)]="approver">
+      <option value="rhName">HR Approver</option>
+    </select>
+    <select [(ngModel)]="remplacant">
+      <option value="remplacantName">Remplacant</option>
+    </select> -->
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="createEvent()">Create</button>
   </div>
+  

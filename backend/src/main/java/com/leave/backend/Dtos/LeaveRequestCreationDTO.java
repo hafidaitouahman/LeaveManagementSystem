@@ -7,12 +7,11 @@ import java.util.List;
 import lombok.Data;
 @Data
 public class LeaveRequestCreationDTO {
-    private LeaveTypeDTO leaveType;
+    private String leaveType;
     private Date startDate;
     private Date endDate;
-    private RhDTO approver;
-    private RemplacantDTO remplacant;
-    private EmployeDTO employe;
+    private String approver;
+    private String remplacant;
     private String comment;
 
 

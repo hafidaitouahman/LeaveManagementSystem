@@ -1,0 +1,24 @@
+<h3>Create LeaveType</h3>
+<button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+<div [hidden]="submitted" style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="leaveType.name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="approbation">approbation</label>
+      <input type="text" class="form-control" id="approbation" required [(ngModel)]="leaveType.approbation" name="approbation">
+    </div>
+
+    <div class="form-group">
+      <label for="soustraction">soustraction</label>
+      <input type="text" class="form-control" id="soustraction" required [(ngModel)]="leaveType.soustraction" name="soustraction">
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>

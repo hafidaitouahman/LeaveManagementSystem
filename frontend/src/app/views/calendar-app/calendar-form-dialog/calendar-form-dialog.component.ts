@@ -108,18 +108,19 @@ export class CalendarFormDialogComponent {
   //     this.calculatedDays = 0;
   //   }
   // }
-  eventTitle: string = '';
+
+  eventType: string = '';
   eventStart: string = '';
   eventEnd: string = '';
-
   constructor(public modal: NgbActiveModal) {}
 
   createEvent() {
     // Validate the input and create a new event
     const newEvent: CalendarEvent = {
-      title: this.eventTitle,
+      title: this.eventType,
       start: new Date(this.eventStart),
       end: new Date(this.eventEnd),
+
       color: colors['blue'], // You can use any color you want here
       draggable: true,
       resizable: {

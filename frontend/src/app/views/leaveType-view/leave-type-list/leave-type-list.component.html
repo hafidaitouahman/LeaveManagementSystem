@@ -1,0 +1,28 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>LeaveType List</h2>
+    </div>
+    <div class="panel-body">
+      <button mat-raised-button color="accent" (click)="openCreateEventModal()">Create</button>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Approbation</th>
+            <th>Soustraction</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let leavetype of leavetypes | async">
+            <td>{{leavetype.name}}</td>
+            <td>{{leavetype.approbation}}</td>
+            <td>{{leavetype.soustraction}}</td>
+            <td><button (click)="deleteLeaveType(leavetype.id)" class="btn btn-danger">Delete</button>
+              <button mat-raised-button color="accent" (click)="openUpdateEventModal()">Update</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

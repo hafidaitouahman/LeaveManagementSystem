@@ -1,16 +1,21 @@
 package com.leave.backend.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import com.leave.backend.Dtos.LeaveRequestCreationDTO;
-import com.leave.backend.Dtos.LeaveRequestDTO;
+import com.leave.backend.Exceptions.EmployeNotFoundException;
+import com.leave.backend.Exceptions.RemplacantNotAvailableException;
 import com.leave.backend.Services.LeaveRequestService;
 
-@RestController
-@RequestMapping("/api/leave-requests")
+@RestController @CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/leave-requests")
 public class LeaveRequestController {
+
     private final LeaveRequestService leaveRequestService;
 
     @Autowired
@@ -18,15 +23,13 @@ public class LeaveRequestController {
         this.leaveRequestService = leaveRequestService;
     }
 
-    @PostMapping
-    public ResponseEntity<String> createLeaveRequest(@RequestBody LeaveRequestCreationDTO requestDTO) {
-        leaveRequestService.createLeaveRequest(requestDTO);
-        return new ResponseEntity<>("Leave request created successfully", HttpStatus.CREATED);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<LeaveRequestDTO> getLeaveRequestDetails(@PathVariable int id) {
-        LeaveRequestDTO leaveRequestDTO = leaveRequestService.getLeaveRequestDetails(id);
-        return new ResponseEntity<>(leaveRequestDTO, HttpStatus.OK);
+    @PostMapping("/create")
+    public ResponseEntity<?> createLeaveRequest(@RequestBody LeaveRequestCreationDTO dto) {
+        try {
+            LeaveRequestCreationDTO createdDto = leaveRequestService.createLeaveRequest(dto);
+            return ResponseEntity.ok(createdDto);
+        } catch (EmployeNotFoundException | RemplacantNotAvailableException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

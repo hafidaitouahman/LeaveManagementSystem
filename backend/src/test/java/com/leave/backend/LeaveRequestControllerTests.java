@@ -13,7 +13,7 @@ import com.leave.backend.Dtos.RemplacantDTO;
 import com.leave.backend.Dtos.RhDTO;
 import com.leave.backend.Repositories.LeaveRequestRepository;
 import com.leave.backend.Services.LeaveRequestService;
-import com.leave.backend.Services.LeaveRequestServiceImpl;
+import com.leave.backend.Services.Implementation.LeaveRequestServiceImpl;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;

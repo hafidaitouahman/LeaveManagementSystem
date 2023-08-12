@@ -3,37 +3,86 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import com.leave.backend.Dtos.LeaveRequestCreationDTO;
 import com.leave.backend.Entities.LeaveRequest;
-import org.springframework.stereotype.Service;
+
+import com.leave.backend.mappers.EmployeMapper;
+import com.leave.backend.mappers.LeaveTypeMapper;
+import com.leave.backend.Entities.Employe;
+import com.leave.backend.Enumeration.Role;
+import com.leave.backend.Repositories.EmployeRepository;
 
 @Service
 public class LeaveRequestMapper {
+
     private final EmployeMapper employeMapper;
     private final LeaveTypeMapper leaveTypeMapper;
-    private final RhMapper rhMapper;
-    private final RemplacantMapper remplacantMapper;
+    private final EmployeRepository employeRepository;
 
     public LeaveRequestMapper(EmployeMapper employeMapper, LeaveTypeMapper leaveTypeMapper,
-                              RhMapper rhMapper, RemplacantMapper remplacantMapper) {
+                              EmployeRepository employeRepository) {
         this.employeMapper = employeMapper;
         this.leaveTypeMapper = leaveTypeMapper;
-        this.rhMapper = rhMapper;
-        this.remplacantMapper = remplacantMapper;
+        this.employeRepository = employeRepository;
     }
 
     public LeaveRequest fromLeaveRequestCreationDTO(LeaveRequestCreationDTO dto) {
-        LeaveRequest leaveRequest = new LeaveRequest();
-        leaveRequest.setStartDate(dto.getStartDate());
-        leaveRequest.setEndDate(dto.getEndDate());
-        leaveRequest.setComment(dto.getComment());
-        leaveRequest.setRemplacant(remplacantMapper.fromRemplacantDTO(dto.getRemplacant()));
-        leaveRequest.setEmploye(employeMapper.fromEmployeDTO(dto.getEmploye()));
-        leaveRequest.setLeaveType(leaveTypeMapper.fromLeaveTypeDTO(dto.getLeaveType()));
-        // Set other properties as needed
-        return leaveRequest;
+        LeaveRequest entity = new LeaveRequest();
+        BeanUtils.copyProperties(dto, entity);
+
+        // entity.setStartDate(dto.getStartDate());
+        // entity.setEndDate(dto.getEndDate());
+        // entity.setComment(dto.getComment());
+        // entity.setLeaveType(dto.getLeaveType());
+        // Set other attributes as needed
+        
+       
+
+        return entity;
     }
-    
-    // Rest of your mapping methods...
+
+    public Employe mapApprover(String approverName) {
+        // Fetch the employe entity with role=rh
+        return employeRepository.findByRoleAndName(Role.RH, approverName);
+    }
+
+    public Employe mapRemplacant(String remplacantName) {
+        // Fetch the employe entity with role=user
+        return employeRepository.findByRoleAndName(Role.USER, remplacantName);
+    }
 }
+
+
+
+// import org.springframework.stereotype.Service;
+
+// @Service
+// public class LeaveRequestMapper {
+//     private final EmployeMapper employeMapper;
+//     private final LeaveTypeMapper leaveTypeMapper;
+//     private final RhMapper rhMapper;
+//     private final RemplacantMapper remplacantMapper;
+
+//     public LeaveRequestMapper(EmployeMapper employeMapper, LeaveTypeMapper leaveTypeMapper,
+//                               RhMapper rhMapper, RemplacantMapper remplacantMapper) {
+//         this.employeMapper = employeMapper;
+//         this.leaveTypeMapper = leaveTypeMapper;
+//         this.rhMapper = rhMapper;
+//         this.remplacantMapper = remplacantMapper;
+//     }
+
+//     public LeaveRequest fromLeaveRequestCreationDTO(LeaveRequestCreationDTO dto) {
+//         LeaveRequest leaveRequest = new LeaveRequest();
+//         leaveRequest.setStartDate(dto.getStartDate());
+//         leaveRequest.setEndDate(dto.getEndDate());
+//         leaveRequest.setComment(dto.getComment());
+//         leaveRequest.setRemplacant(remplacantMapper.fromRemplacantDTO(dto.getRemplacant()));
+//         leaveRequest.setEmploye(employeMapper.fromEmployeDTO(dto.getEmploye()));
+//         leaveRequest.setLeaveType(leaveTypeMapper.fromLeaveTypeDTO(dto.getLeaveType()));
+//         // Set other properties as needed
+//         return leaveRequest;
+//     }
+    
+//     // Rest of your mapping methods...
+// }
 
 
 // @Service
