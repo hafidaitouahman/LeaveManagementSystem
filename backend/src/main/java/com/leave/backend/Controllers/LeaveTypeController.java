@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.leave.backend.Dtos.LeaveTypeDTO;
+import com.leave.backend.Exceptions.LeaveTypeNotFoundException;
 import com.leave.backend.Services.LeaveTypeService;
 import com.leave.backend.Services.LeaveTypeService;
 
@@ -26,9 +27,9 @@ public class LeaveTypeController {
         return leaveTypeService.addLeaveType(leaveTypeDTO);
     }
 
-    @PutMapping("/update")
-    public LeaveTypeDTO updateOrganisation(@RequestBody LeaveTypeDTO leaveTypeDTO){
-        return leaveTypeService.updateLeaveType(leaveTypeDTO);
+    @PutMapping("/{id}")
+    public LeaveTypeDTO updateLeaveType(@PathVariable int id,@RequestBody LeaveTypeDTO leaveTypeDTO)throws LeaveTypeNotFoundException{
+        return leaveTypeService.updateLeaveType(id,leaveTypeDTO);
     }
 
     @GetMapping("/all")
@@ -39,6 +40,10 @@ public class LeaveTypeController {
     @DeleteMapping("/delete/{id}")
     public void deleteLeaveTypeById(@PathVariable int id){
         leaveTypeService.deleteLeaveTypeById(id);
+    }
+    @GetMapping("/{id}")
+    public LeaveTypeDTO getById(@PathVariable int id) throws LeaveTypeNotFoundException {
+        return leaveTypeService.findById(id);
     }
     
 }

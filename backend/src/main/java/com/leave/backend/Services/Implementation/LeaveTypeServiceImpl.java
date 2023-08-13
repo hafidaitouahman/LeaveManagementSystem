@@ -2,6 +2,7 @@ package com.leave.backend.Services.Implementation;
 
 import com.leave.backend.Dtos.LeaveTypeDTO;
 import com.leave.backend.Entities.LeaveType;
+import com.leave.backend.Exceptions.LeaveTypeNotFoundException;
 import com.leave.backend.Repositories.LeaveTypeRepository;
 import com.leave.backend.Services.LeaveTypeService;
 import com.leave.backend.mappers.LeaveTypeMapper;
@@ -37,15 +38,25 @@ public class LeaveTypeServiceImpl implements LeaveTypeService {
     }
 
     @Override
-    public LeaveTypeDTO updateLeaveType(LeaveTypeDTO leaveTypeDTO){
-        log.info("Updating the LeaveType");
-        
-        // Convert LeaveTypeDTO to LeaveType entity using the leaveTypeMapper
-        LeaveType leaveType = leaveTypeMapper.fromLeaveTypeDTO(leaveTypeDTO);
-        // Save new user in database
-        LeaveType savedLeaveType = leaveTypeRepository.save(leaveType);
-        // Convert LeaveType entity to LeaveTypeDTO using the leaveTypeMapper
-        return leaveTypeMapper.fromLeaveType(savedLeaveType);
+    public LeaveTypeDTO updateLeaveType( int id,LeaveTypeDTO leaveTypeDTO) throws LeaveTypeNotFoundException{
+
+          LeaveType leaveType = leaveTypeRepository.findById(id)
+         .orElseThrow(() -> new LeaveTypeNotFoundException("not found"));
+   
+
+            // Update the properties of the existing user
+            leaveType.setName(leaveTypeDTO.getName());
+            leaveType.setApprobation(leaveType.isApprobation());
+            leaveType.setSoustraction(leaveType.getSoustraction());
+            // ... update other properties ...
+
+            LeaveType updatedUser = leaveTypeRepository.save(leaveType);
+            return leaveTypeMapper.fromLeaveType(updatedUser);
+
+
+
+
+    
     }
 
     @Override
@@ -68,6 +79,14 @@ public class LeaveTypeServiceImpl implements LeaveTypeService {
 
         leaveTypeRepository.delete(leaveType);
 
+     }
+
+     @Override
+     public LeaveTypeDTO findById(int id) throws LeaveTypeNotFoundException{
+         LeaveType leaveType = leaveTypeRepository.findById(id)
+         .orElseThrow(() -> new LeaveTypeNotFoundException("not found"));
+                 
+         return leaveTypeMapper.fromLeaveType(leaveType);
      }
 
 }

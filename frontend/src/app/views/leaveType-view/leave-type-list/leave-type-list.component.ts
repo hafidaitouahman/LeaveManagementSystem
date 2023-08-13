@@ -19,6 +19,7 @@ export class LeaveTypeListComponent implements OnInit {
   ngOnInit() {
     this.reloadData();
   }
+  
 
   reloadData() {
     this.leavetypes = this.leaveTypeService.getLeaveTypesList();
@@ -48,4 +49,5 @@ export class LeaveTypeListComponent implements OnInit {
     });
 
   }
+  
 }

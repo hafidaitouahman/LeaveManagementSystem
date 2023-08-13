@@ -24,6 +24,6 @@ export class LeaveTypeService {
     return this.http.post(`${this.baseUrl}/add`, leaveType);
   }
   updateLeaveType(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/update/${id}`, value);
+    return this.http.put(`${this.baseUrl}/${id}`, value);
   }
 }
