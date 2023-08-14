@@ -23,6 +23,8 @@ import { CreateLeaveTypeComponent } from './views/leaveType-view/create-leave-ty
 import { LeaveTypeListComponent } from './views/leaveType-view/leave-type-list/leave-type-list.component';
 import {HttpClientModule} from '@angular/common/http';
 import { UpdateLeaveTypeComponent } from './views/leaveType-view/update-leave-type/update-leave-type.component'
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { SidebarService } from './shared/sevices/sidebar.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +56,7 @@ import { UpdateLeaveTypeComponent } from './views/leaveType-view/update-leave-ty
       useFactory: adapterFactory,
     }),
 
+    
 
   ],
   providers: [],

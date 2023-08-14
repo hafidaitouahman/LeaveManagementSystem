@@ -46,8 +46,8 @@ public class LeaveTypeServiceImpl implements LeaveTypeService {
 
             // Update the properties of the existing user
             leaveType.setName(leaveTypeDTO.getName());
-            leaveType.setApprobation(leaveType.isApprobation());
-            leaveType.setSoustraction(leaveType.getSoustraction());
+            leaveType.setApprobation(leaveTypeDTO.isApprobation());
+            leaveType.setSoustraction(leaveTypeDTO.getSoustraction());
             // ... update other properties ...
 
             LeaveType updatedUser = leaveTypeRepository.save(leaveType);

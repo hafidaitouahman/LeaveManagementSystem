@@ -1,4 +1,13 @@
 <!-- <app-header-top></app-header-top>
 <app-calendar-app></app-calendar-app> -->
+<app-header-top></app-header-top>
 
-<app-leave-type-list></app-leave-type-list>
+<mat-sidenav-container>
+    <mat-sidenav mode="side" opened="true" >
+      <app-sidebar></app-sidebar>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+        <app-leave-type-list></app-leave-type-list>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

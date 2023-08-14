@@ -3,17 +3,17 @@
   <form (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" required [(ngModel)]="leaveType.name" name="name">
+      <input type="text" class="form-control" id="name" required [(ngModel)]="leavetype.name" name="name">
     </div>
 
     <div class="form-group">
-      <label for="Approbation">Approbation</label>
-      <input type="text" class="form-control" id="Approbation" required [(ngModel)]="leaveType.approbation" name="Approbation">
+      <label for="approbation">approbation</label>
+      <input type="text" class="form-control" id="approbation" required [(ngModel)]="leavetype.approbation" name="approbation">
     </div>
 
     <div class="form-group">
       <label for="soustraction">soustraction</label>
-      <input type="text" class="form-control" id="soustraction" required [(ngModel)]="leaveType.soustraction" name="soustraction">
+      <input type="text" class="form-control" id="soustraction" required [(ngModel)]="leavetype.soustraction" name="soustraction">
     </div>
 
     <button type="submit" class="btn btn-success">Submit</button>

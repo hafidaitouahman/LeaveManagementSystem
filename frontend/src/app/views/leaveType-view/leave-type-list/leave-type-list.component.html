@@ -20,7 +20,7 @@
             <td>{{leavetype.approbation}}</td>
             <td>{{leavetype.soustraction}}</td>
             <td><button (click)="deleteLeaveType(leavetype.id)" class="btn btn-danger">Delete</button>
-              <button mat-raised-button color="accent" (click)="openUpdateEventModal()">Update</button></td>
+              <button mat-raised-button color="accent" (click)="openUpdateEventModal(leavetype.id)">Update</button></td>
           </tr>
         </tbody>
       </table>

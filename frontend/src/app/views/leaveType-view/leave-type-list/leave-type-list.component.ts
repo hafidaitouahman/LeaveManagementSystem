@@ -42,11 +42,15 @@ export class LeaveTypeListComponent implements OnInit {
     });
 
   }
-  openUpdateEventModal(): void {
+  openUpdateEventModal(id: number): void {
+    
     const modalRef = this.modal.open(UpdateLeaveTypeComponent);
+    modalRef.componentInstance.id = id; // Pass the id to the modal component
+  
     modalRef.closed.subscribe(result => {
-      this.reloadData(); // Recharge les données après la fermeture du popup
+      this.reloadData();
     });
+
 
   }
   

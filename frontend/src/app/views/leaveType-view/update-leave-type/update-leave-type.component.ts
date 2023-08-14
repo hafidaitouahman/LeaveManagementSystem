@@ -12,29 +12,28 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 export class UpdateLeaveTypeComponent implements OnInit {
 
   id!: number;
-  leaveType!: LeaveType;
+  leavetype: LeaveType = new LeaveType();
 
   constructor(private route: ActivatedRoute,private router: Router,
     private leaveTypeService: LeaveTypeService,public modal: NgbActiveModal) { }
 
   ngOnInit() {
-    this.leaveType = new LeaveType();
-
-    this.id = this.route.snapshot.params['id'];
-    
-    this.leaveTypeService.getLeaveType(this.id)
-      .subscribe(data => {
-        console.log(data)
-        this.leaveType = data;
-      }, error => console.log(error));
+    if (this.id) {
+      this.leaveTypeService.getLeaveType(this.id)
+        .subscribe(data => {
+          this.leavetype = data;
+        });
+    }
   }
 
+  
+
   updateLeaveType() {
-    this.leaveTypeService.updateLeaveType(this.id, this.leaveType)
+    this.leaveTypeService.updateLeaveType(this.id, this.leavetype)
       .subscribe(data => {
         console.log(data);
-        this.leaveType = new LeaveType();
-        this.modal.close(this.leaveType); // Ferme la boîte de dialogue
+        this.leavetype = new LeaveType();
+        this.modal.close(this.leavetype); // Ferme la boîte de dialogue
         this.gotoList();
       }, error => console.log(error));
   }
