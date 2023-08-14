@@ -25,6 +25,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { UpdateLeaveTypeComponent } from './views/leaveType-view/update-leave-type/update-leave-type.component'
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { SidebarService } from './shared/sevices/sidebar.service';
+import { CreateDepartementComponent } from './views/departement-view/create-departement/create-departement.component';
+import { UpdateDepartementComponent } from './views/departement-view/update-departement/update-departement.component';
+import { DepartementListComponent } from './views/departement-view/departement-list/departement-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +40,9 @@ import { SidebarService } from './shared/sevices/sidebar.service';
     CreateLeaveTypeComponent,
     LeaveTypeListComponent,
     UpdateLeaveTypeComponent,
+    CreateDepartementComponent,
+    UpdateDepartementComponent,
+    DepartementListComponent
 
   ],
   imports: [
