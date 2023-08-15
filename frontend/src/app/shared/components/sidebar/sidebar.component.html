@@ -1,21 +1,34 @@
 <div class="sidebar_menu" [@onSideNavChange]="sidebarState">
   <mat-nav-list class="menu-list">
+    <mat-divider></mat-divider>
+
     <a mat-list-item routerLinkActive="active-list-item" routerLink="login" title="Login">
       <mat-icon class="icon" [@iconAnimation]="sidebarState"></mat-icon>
-      <span class="label" [@labelAnimation]="sidebarState">Organisation</span>
+      <span class="label fw-bold" [@labelAnimation]="sidebarState">Organisation</span>
     </a>
     <mat-divider></mat-divider>
-    <a mat-list-item routerLinkActive="active-list-item" routerLink="dashboard" title="Dashboard">
+    <a mat-list-item routerLinkActive="active-list-item" routerLink="dashboard" title="Dashboard" (click) = "gotoDepartement()">
       <mat-icon class="icon" [@iconAnimation]="sidebarState"></mat-icon>
-      <span class="label" [@labelAnimation]="sidebarState">Departement</span>
+      <span class="label" [@labelAnimation]="sidebarState" >Departement</span>
     </a>
-    <a mat-list-item routerLinkActive="active-list-item" routerLink="work" title="Work">
+    <a mat-list-item routerLinkActive="active-list-item" routerLink="work" title="Work" (click) = "gotoTeam()">
       <mat-icon class="icon" [@iconAnimation]="sidebarState"></mat-icon>
-      <span class="label" [@labelAnimation]="sidebarState">Equipe</span>
+      <span class="label" [@labelAnimation]="sidebarState" >Equipe</span>
     </a>
-    <a mat-list-item routerLinkActive="active-list-item" routerLink="feedback" title="Feedback">
+    <a mat-list-item routerLinkActive="active-list-item" routerLink="feedback" title="Feedback"  (click) = "gotoSite()">
       <mat-icon class="icon" [@iconAnimation]="sidebarState"></mat-icon>
       <span class="label" [@labelAnimation]="sidebarState">Site</span>
     </a>
-  </mat-nav-list>
+  
+  <mat-divider></mat-divider>
+    <a mat-list-item routerLinkActive="active-list-item" routerLink="login" title="Login">
+      <mat-icon class="icon" [@iconAnimation]="sidebarState"></mat-icon>
+      <span class="label fw-bold" [@labelAnimation]="sidebarState">Parametre du Calendrier</span>
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLinkActive="active-list-item" routerLink="login" title="Login" (click) = "gotoLeaveType()">
+      <mat-icon class="icon" [@iconAnimation]="sidebarState"></mat-icon>
+      <span class="label" [@labelAnimation]="sidebarState">Types de Congés</span>
+    </a>
+</mat-nav-list>
 </div>

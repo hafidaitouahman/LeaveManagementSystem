@@ -28,6 +28,12 @@ import { SidebarService } from './shared/sevices/sidebar.service';
 import { CreateDepartementComponent } from './views/departement-view/create-departement/create-departement.component';
 import { UpdateDepartementComponent } from './views/departement-view/update-departement/update-departement.component';
 import { DepartementListComponent } from './views/departement-view/departement-list/departement-list.component';
+import { CreateTeamComponent } from './views/team-view/create-team/create-team.component';
+import { UpdateTeamComponent } from './views/team-view/update-team/update-team.component';
+import { TeamListComponent } from './views/team-view/team-list/team-list.component';
+import { CreateSiteComponent } from './views/site-view/create-site/create-site.component';
+import { UpdateSiteComponent } from './views/site-view/update-site/update-site.component';
+import { SiteListComponent } from './views/site-view/site-list/site-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +48,13 @@ import { DepartementListComponent } from './views/departement-view/departement-l
     UpdateLeaveTypeComponent,
     CreateDepartementComponent,
     UpdateDepartementComponent,
-    DepartementListComponent
+    DepartementListComponent,
+    CreateTeamComponent,
+    UpdateTeamComponent,
+    TeamListComponent,
+    CreateSiteComponent,
+    UpdateSiteComponent,
+    SiteListComponent
 
   ],
   imports: [

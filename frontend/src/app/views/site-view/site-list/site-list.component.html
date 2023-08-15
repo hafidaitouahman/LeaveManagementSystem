@@ -1,6 +1,6 @@
 <div class="panel panel-primary main_container" style=" height:100vh;">
     <div class="panel-heading">
-      <h2>Departement List</h2>
+      <h2>Site List</h2>
     </div>
     <div class="panel-body">
       <button mat-raised-button color="accent" (click)="openCreateEventModal()">Create</button>
@@ -14,11 +14,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let departement of departements | async">
-            <td>{{departement.name}}</td>
+          <tr *ngFor="let site of sites | async">
+            <td>{{site.name}}</td>
           
-            <td><button (click)="deleteDepartement(departement.id)" class="btn btn-danger">Delete</button>
-              <button mat-raised-button color="accent" (click)="openUpdateEventModal(departement.id)">Update</button></td>
+            <td><button (click)="deleteSite(site.id)" class="btn btn-danger">Delete</button>
+              <button mat-raised-button color="accent" (click)="openUpdateEventModal(site.id)">Update</button></td>
           </tr>
         </tbody>
       </table>
