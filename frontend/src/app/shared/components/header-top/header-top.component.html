@@ -53,7 +53,7 @@
 		<div class="navbar-nav ml-auto ">
 			<mat-icon  matBadge="1" matBadgeSize="small" matBadgeColor="warn">notifications</mat-icon>
 			<div class="nav-item dropdown">
-				<a  [matMenuTriggerFor]="accountMenu"  data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img src="" class="avatar" alt="Avatar"> Paula Wilson <b class="caret"></b></a>
+				<a  [matMenuTriggerFor]="accountMenu"  data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img src="" class="avatar" alt="Avatar"> <strong>{{ currentUser.username }}</strong> <b class="caret"></b></a>
 				
 				  <mat-menu #accountMenu="matMenu">
 					<button mat-menu-item>

@@ -47,14 +47,14 @@ public class EmployeMapper {
     public Employe fromEmployeDTO(EmployeDTO employeDTO){
         Employe employe = new Employe();
         BeanUtils.copyProperties(employeDTO, employe);
-        employe.setTeams(teamMapper.fromTeamDTO(employeDTO.getTeamDTO()));
+        //employe.setTeams(teamMapper.fromTeamDTO(employeDTO.getTeamDTO()));
         return employe;
     }
     
     public EmployeDTO toEmployeDTO(Employe employe){
         EmployeDTO employeDTO = new EmployeDTO();
         BeanUtils.copyProperties(employe, employeDTO);
-        employeDTO.setTeamDTO(teamMapper.fromTeam(employe.getTeams()));
+        //employeDTO.setTeamDTO(teamMapper.fromTeam(employe.getTeams()));
         return employeDTO;
     }
         public Team fromTeamDTO(TeamDTO teamDTO) {

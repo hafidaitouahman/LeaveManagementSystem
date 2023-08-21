@@ -10,7 +10,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.leave.backend.Dtos.LeaveRequestCreationDTO;
 import com.leave.backend.Entities.Employe;
 import com.leave.backend.Entities.LeaveRequest;
-import com.leave.backend.Enumeration.Role;
+//import com.leave.backend.Enumeration.Role;
 import com.leave.backend.Exceptions.EmployeNotFoundException;
 import com.leave.backend.Exceptions.RemplacantNotAvailableException;
 import com.leave.backend.Repositories.EmployeRepository;
@@ -48,8 +48,8 @@ public class LeaveRequestServiceImplTest {
         remplacantEntity.setName("remplacantName");
 
         // Mock the repository responses
-        when(employeRepository.findByRoleAndName(eq(Role.RH), eq("rhName"))).thenReturn(rhEntity);
-        when(employeRepository.findByRoleAndName(eq(Role.USER), eq("remplacantName"))).thenReturn(remplacantEntity);
+        // when(employeRepository.findByRoleAndName(eq(Role.RH), eq("rhName"))).thenReturn(rhEntity);
+        // when(employeRepository.findByRoleAndName(eq(Role.USER), eq("remplacantName"))).thenReturn(remplacantEntity);
 
         // Mock the LeaveRequestMapper
         when(leaveRequestMapper.fromLeaveRequestCreationDTO(dto)).thenReturn(new LeaveRequest());

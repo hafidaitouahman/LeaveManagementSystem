@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,6 +33,10 @@ import { TeamListComponent } from './views/team-view/team-list/team-list.compone
 import { CreateSiteComponent } from './views/site-view/create-site/create-site.component';
 import { UpdateSiteComponent } from './views/site-view/update-site/update-site.component';
 import { SiteListComponent } from './views/site-view/site-list/site-list.component';
+import { LoginComponent } from './views/login-view/login/login.component';
+import { RegistrationComponent } from './views/registration-view/registration/registration.component';
+import { HttpRequestInterceptor } from './shared/helpers/http.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +57,9 @@ import { SiteListComponent } from './views/site-view/site-list/site-list.compone
     TeamListComponent,
     CreateSiteComponent,
     UpdateSiteComponent,
-    SiteListComponent
+    SiteListComponent,
+    LoginComponent,
+    RegistrationComponent
 
   ],
   imports: [
@@ -77,7 +82,7 @@ import { SiteListComponent } from './views/site-view/site-list/site-list.compone
     
 
   ],
-  providers: [],
+  providers: [HttpRequestInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

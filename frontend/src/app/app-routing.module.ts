@@ -5,13 +5,19 @@ import { DepartementListComponent } from './views/departement-view/departement-l
 import { TeamListComponent } from './views/team-view/team-list/team-list.component';
 import { AppComponent } from './app.component';
 import { SiteListComponent } from './views/site-view/site-list/site-list.component';
+import { CalendarAppComponent } from './views/calendar-app/calendar-app.component';
+import { LoginComponent } from './views/login-view/login/login.component';
+import { RegistrationComponent } from './views/registration-view/registration/registration.component';
 const routes: Routes = [
   { path: '', component: LeaveTypeListComponent },
   { path: 'leavetypes', component: LeaveTypeListComponent },
   { path: 'departement', component: DepartementListComponent },
   {path:'team', component:TeamListComponent},
   {path:'site', component:SiteListComponent},
+  {path:'calendar', component:CalendarAppComponent},
 
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegistrationComponent },
 
 ];
 

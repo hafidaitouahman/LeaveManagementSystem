@@ -13,7 +13,7 @@ import com.leave.backend.Dtos.RemplacantDTO;
 import com.leave.backend.Entities.Employe;
 import com.leave.backend.Entities.LeaveRequest;
 import com.leave.backend.Entities.LeaveType;
-import com.leave.backend.Enumeration.Role;
+
 import com.leave.backend.Exceptions.EmployeNotFoundException;
 import com.leave.backend.Exceptions.RemplacantNotAvailableException;
 import com.leave.backend.Repositories.EmployeRepository;
@@ -44,16 +44,16 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
     public LeaveRequestCreationDTO createLeaveRequest(LeaveRequestCreationDTO dto)
             throws EmployeNotFoundException, RemplacantNotAvailableException {
         // Convert the DTO fields to entities and fetch employe entities
-        Employe rhEntity = employeRepository.findByRoleAndName(Role.RH, dto.getApprover());
-        Employe remplacantEntity = employeRepository.findByRoleAndName(Role.USER, dto.getRemplacant());
+        // Employe rhEntity = employeRepository.findByRoleAndName(Role.RH, dto.getApprover());
+        // Employe remplacantEntity = employeRepository.findByRoleAndName(Role.USER, dto.getRemplacant());
 
         // Map the DTO fields and employe entities to LeaveRequestCreationDTO
         // ...
 
         // Map LeaveRequestCreationDTO to LeaveRequest entity
         LeaveRequest leaveRequestEntity = leaveRequestMapper.fromLeaveRequestCreationDTO(dto);
-        leaveRequestEntity.setEmploye(rhEntity); // Set the approver (RH)
-        leaveRequestEntity.setRemplacant(remplacantEntity); // Set the remplacant
+        // leaveRequestEntity.setEmploye(rhEntity); // Set the approver (RH)
+        // leaveRequestEntity.setRemplacant(remplacantEntity); // Set the remplacant
 
         // Save the leave request entity in the database using the repository
         leaveRequestRepository.save(leaveRequestEntity);

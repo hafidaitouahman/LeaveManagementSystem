@@ -7,7 +7,7 @@ import com.leave.backend.Entities.LeaveRequest;
 import com.leave.backend.mappers.EmployeMapper;
 import com.leave.backend.mappers.LeaveTypeMapper;
 import com.leave.backend.Entities.Employe;
-import com.leave.backend.Enumeration.Role;
+//import com.leave.backend.Enumeration.Role;
 import com.leave.backend.Repositories.EmployeRepository;
 
 @Service
@@ -39,15 +39,15 @@ public class LeaveRequestMapper {
         return entity;
     }
 
-    public Employe mapApprover(String approverName) {
-        // Fetch the employe entity with role=rh
-        return employeRepository.findByRoleAndName(Role.RH, approverName);
-    }
+    //public Employe mapApprover(String approverName) {
+    //     // Fetch the employe entity with role=rh
+    //     //return employeRepository.findByRoleAndName(Role.RH, approverName);
+    // }
 
-    public Employe mapRemplacant(String remplacantName) {
-        // Fetch the employe entity with role=user
-        return employeRepository.findByRoleAndName(Role.USER, remplacantName);
-    }
+    // public Employe mapRemplacant(String remplacantName) {
+    //     // Fetch the employe entity with role=user
+    //    // return employeRepository.findByRoleAndName(Role.USER, remplacantName);
+    // }
 }
 
 
