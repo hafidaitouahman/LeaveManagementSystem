@@ -10,7 +10,7 @@ import { AuthService } from './shared/sevices/auth.service';
 export class AppComponent {
   private roles: string[] = [];
   isLoggedIn = false;
-  showAdminBoard = false;
+  showAdminBoard  = false;
   showModeratorBoard = false;
   username?: string;
 
@@ -23,8 +23,7 @@ export class AppComponent {
       const user = this.storageService.getUser();
       this.roles = user.roles;
 
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.showAdminBoard  = this.roles.includes('ROLE_RH');
 
       this.username = user.username;
     }

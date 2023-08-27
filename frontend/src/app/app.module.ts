@@ -35,7 +35,8 @@ import { UpdateSiteComponent } from './views/site-view/update-site/update-site.c
 import { SiteListComponent } from './views/site-view/site-list/site-list.component';
 import { LoginComponent } from './views/login-view/login/login.component';
 import { RegistrationComponent } from './views/registration-view/registration/registration.component';
-import { HttpRequestInterceptor } from './shared/helpers/http.interceptor';
+import { httpInterceptorProviders } from './shared/helpers/http.interceptor';
+import { ProfileComponent } from './views/profile-view/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { HttpRequestInterceptor } from './shared/helpers/http.interceptor';
     UpdateSiteComponent,
     SiteListComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProfileComponent
 
   ],
   imports: [
@@ -82,7 +84,7 @@ import { HttpRequestInterceptor } from './shared/helpers/http.interceptor';
     
 
   ],
-  providers: [HttpRequestInterceptor],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

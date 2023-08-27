@@ -7,7 +7,7 @@ import { LeaveType } from 'src/app/shared/models/leavetype.module';
   providedIn: 'root'
 })
 export class LeaveTypeService {
-  private baseUrl ='http://localhost:8080/leaveType'
+  private baseUrl ='http://localhost:8080/api/leaveType'
 
   leaveType: LeaveType = new LeaveType();
 

@@ -1,9 +1,9 @@
-package com.leave.backend.Repositories;
+// package com.leave.backend.Repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.leave.backend.Entities.LeaveQuota;
+// import com.leave.backend.Entities.LeaveQuota;
 
-public interface LeaveQuotaRepository extends JpaRepository<LeaveQuota, Integer> {
+// public interface LeaveQuotaRepository extends JpaRepository<LeaveQuota, Integer> {
     
-}
+// }

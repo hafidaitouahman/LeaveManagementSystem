@@ -6,18 +6,22 @@ import { CreateSiteComponent } from '../create-site/create-site.component';
 import { UpdateSiteComponent } from '../update-site/update-site.component';
 import { Site } from 'src/app/shared/models/site.module';
 import { SiteService } from '../site.service';
+import { StorageService } from 'src/app/shared/sevices/storage.service';
 @Component({
   selector: 'app-site-list',
   templateUrl: './site-list.component.html',
   styleUrls: ['./site-list.component.css']
 })
 export class SiteListComponent {
+  currentUser: any;
   sites!: Observable<Site[]>;
   constructor(private siteService: SiteService,
-    private router: Router,private modal: NgbModal) {}
+    private router: Router,private modal: NgbModal,private storageService: StorageService) {}
 
   ngOnInit() {
     this.reloadData();
+    this.currentUser = this.storageService.getUser();
+
   }
   
 

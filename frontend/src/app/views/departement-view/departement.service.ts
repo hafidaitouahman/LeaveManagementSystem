@@ -8,7 +8,7 @@ import { Departement } from 'src/app/shared/models/departement.module';
 })
 export class DepartementService {
 
-  private baseUrl ='http://localhost:8080/departement'
+  private baseUrl ='http://localhost:8080/api/departement'
 
   departement: Departement = new Departement();
 

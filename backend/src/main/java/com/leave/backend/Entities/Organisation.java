@@ -28,8 +28,8 @@ public class Organisation {
     private String name;
     private String address;
     private String description;
-    @OneToMany(mappedBy="organisation")
-    private List<Employe> employes;
+    // @OneToMany(mappedBy="organisation")
+    // private List<Employe> employes;
     // @OneToMany
     // private List<Team> teams;
     // @OneToMany

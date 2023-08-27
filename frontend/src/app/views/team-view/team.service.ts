@@ -7,7 +7,7 @@ import { Team } from 'src/app/shared/models/team.module';
 })
 export class TeamService {
 
-  private baseUrl ='http://localhost:8080/team'
+  private baseUrl ='http://localhost:8080/api/team'
 
   team: Team = new Team();
 

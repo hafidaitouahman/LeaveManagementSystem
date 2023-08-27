@@ -10,6 +10,7 @@ import { SidebarService } from '../../sevices/sidebar.service';
 export class SidebarComponent implements OnInit {
   sidebarState!: string;
 
+
   constructor(
     private sidebarService: SidebarService, private router: Router
   ) { }

@@ -42,9 +42,36 @@
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
 		<div class="navbar-nav">
+			    <ul class="navbar-nav mr-auto" routerLinkActive="active">
+
 			<button class="nav-item nav-link " mat-button>MON CALENDRIER</button>
 			<button class="nav-item nav-link " mat-button>CALENDRIER DE L'ENTREPRISE</button>
+			<li class="nav-item" *ngIf="showAdminBoard">
+				<a href="/admin" class="nav-link" routerLink="admin">RH Board</a>
+			  </li>
 		
+			  <li class="nav-item">
+				<a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+			  </li>
+			</ul>
+		
+			<ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+			  <li class="nav-item">
+				<a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+			  </li>
+			  <li class="nav-item">
+				<a href="/login" class="nav-link" routerLink="login">Login</a>
+			  </li>
+			</ul>
+		
+			<ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+			  <li class="nav-item">
+				<a href="/profile" class="nav-link" routerLink="profile">{{ username }} Profile</a>
+			  </li>
+			  <li class="nav-item">
+				<a href class="nav-link" (click)="logout()">LogOut</a>
+			  </li>
+			</ul>
 			
 			
 		</div>
@@ -55,8 +82,8 @@
 			<div class="nav-item dropdown">
 				<a  [matMenuTriggerFor]="accountMenu"  data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img src="" class="avatar" alt="Avatar"> <strong>{{ currentUser.username }}</strong> <b class="caret"></b></a>
 				
-				  <mat-menu #accountMenu="matMenu">
-					<button mat-menu-item>
+				  <mat-menu #accountMenu="matMenu" >
+					<button mat-menu-item >
 					  <mat-icon>account_box</mat-icon> 
 					  <span>Profile</span>
 					</button>

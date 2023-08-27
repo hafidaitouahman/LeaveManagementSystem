@@ -34,7 +34,7 @@ public class LeaveType {
 
     private String soustraction;
 
-    @OneToMany(mappedBy="leaveType")
-    private List<LeaveRequest> leaveRequests;
+    // @OneToMany(mappedBy="leaveType")
+    // private List<LeaveRequest> leaveRequests;
     
 }

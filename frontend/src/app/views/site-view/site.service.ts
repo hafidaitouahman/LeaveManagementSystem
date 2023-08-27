@@ -8,7 +8,7 @@ import { Site } from 'src/app/shared/models/site.module';
 })
 export class SiteService {
 
-  private baseUrl ='http://localhost:8080/site'
+  private baseUrl ='http://localhost:8080/api/site'
 
   site: Site = new Site();
 

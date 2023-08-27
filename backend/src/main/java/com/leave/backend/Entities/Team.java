@@ -30,8 +30,8 @@ public class Team {
 
   
     private String name;
-    @OneToMany
-    private List<Employe> employes;
+    // @OneToMany
+    // private List<Employe> employes;
     @ManyToOne
     private Organisation organisation;
 

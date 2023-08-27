@@ -7,8 +7,7 @@ import { Login } from 'src/app/shared/models/login.module';
   providedIn: 'root'
 })
 export class LoginService {
-  private baseUrl = 'http://localhost:8080'; // Remplacez l'URL par l'URL de votre backend
-
+  private baseUrl = 'http://localhost:8080'; 
   constructor(private http: HttpClient) { }
 
   loginUser(user: Login): Observable<any> {
