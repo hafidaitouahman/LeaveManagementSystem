@@ -37,6 +37,7 @@ import { LoginComponent } from './views/login-view/login/login.component';
 import { RegistrationComponent } from './views/registration-view/registration/registration.component';
 import { httpInterceptorProviders } from './shared/helpers/http.interceptor';
 import { ProfileComponent } from './views/profile-view/profile/profile.component';
+import { RhDashboardComponent } from './views/rh-dashboard/rh-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ProfileComponent } from './views/profile-view/profile/profile.component
     SiteListComponent,
     LoginComponent,
     RegistrationComponent,
-    ProfileComponent
+    ProfileComponent,
+    RhDashboardComponent
 
   ],
   imports: [

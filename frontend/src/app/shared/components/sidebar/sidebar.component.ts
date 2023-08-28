@@ -23,15 +23,15 @@ export class SidebarComponent implements OnInit {
   }
 
   gotoDepartement(){
-    this.router.navigate(['departement']);
+    this.router.navigate(['/rh/departement']);
   }
   gotoTeam(){
-    this.router.navigate(['team']);
+    this.router.navigate(['/rh/team']);
   }
   gotoSite(){
-    this.router.navigate(['site']);
+    this.router.navigate(['/rh/site']);
   }
   gotoLeaveType(){
-    this.router.navigate(['leavetypes']);
+    this.router.navigate(['/rh/leavetypes']);
   }
 }

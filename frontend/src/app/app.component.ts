@@ -12,6 +12,7 @@ export class AppComponent {
   isLoggedIn = false;
   showAdminBoard  = false;
   showModeratorBoard = false;
+  showSideBar = false;
   username?: string;
 
   constructor(private storageService: StorageService, private authService: AuthService) { }
@@ -24,7 +25,7 @@ export class AppComponent {
       this.roles = user.roles;
 
       this.showAdminBoard  = this.roles.includes('ROLE_RH');
-
+      this.showSideBar = this.roles.includes('ROLE_RH');
       this.username = user.username;
     }
   }

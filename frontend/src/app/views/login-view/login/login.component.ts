@@ -27,7 +27,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/sevices/auth.service';
 import { StorageService } from 'src/app/shared/sevices/storage.service';
-
+import { Router } from '@angular/router';
+import { CalendarAppComponent } from '../../calendar-app/calendar-app.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -42,8 +43,9 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  currentUser = this.storageService.getUser();
 
-  constructor(private authService: AuthService, private storageService: StorageService) { }
+  constructor(private authService: AuthService, private storageService: StorageService,private router : Router ) { }
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
@@ -62,7 +64,13 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
-        this.reloadPage();
+        //
+        if(this.storageService.getUser().roles=='ROLE_USER'){
+          this.router.navigateByUrl("/calendar");
+        }else{
+          
+          this.router.navigateByUrl("/rh");}
+      this.reloadPage();
       },
       error: err => {
         this.errorMessage = err.error.message;
@@ -71,7 +79,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  reloadPage(): void {
-    window.location.reload();
-  }
+  reloadPage() {
+    setTimeout(()=>{
+      window.location.reload();
+    }, 10);
+}
 }
