@@ -153,7 +153,7 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
-
+import { HolidaysService } from '../holiday-view/holidays.service';
 const colors: Record<string, EventColor> = {
   red: {
     primary: '#ad2121',
@@ -240,8 +240,27 @@ export class CalendarAppComponent {
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private modal: NgbModal,private holidaysService:HolidaysService ) {}
+  ngOnInit(): void {
+    this.holidaysService.getHolidays().subscribe(data => {
+      const holidays = data.map(holiday => {
+        return {
+          start: new Date(holiday.date),
+          title: holiday.name,
+          color: colors['blue'], // Choisissez une couleur pour les jours fériés
+          actions: [], // Vous pouvez définir des actions pour les jours fériés si nécessaire
+          allDay: true,
+          resizable: {
+            beforeStart: false,
+            afterEnd: false,
+          },
+          draggable: false,
+        };
+      });
 
+      this.events = [...this.events, ...holidays];
+    });
+  }
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       if (

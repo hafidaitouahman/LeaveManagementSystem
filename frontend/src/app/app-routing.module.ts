@@ -13,16 +13,18 @@ import { AuthenticationGuard } from './shared/guards/authentication.guard';
 import { AuthorizationGuard } from './shared/guards/authorization.guard';
 import { RhDashboardComponent } from './views/rh-dashboard/rh-dashboard.component';
 import { NotAuthComponent } from './shared/components/not-auth/not-auth.component';
+import { HolidaysComponent } from './views/holiday-view/holidays/holidays.component';
 const routes: Routes = [
   //{ path: '', redirectTo: 'login', pathMatch: 'full' },
   
   
-  {path:'calendar', component:CalendarAppComponent, canActivate : [AuthorizationGuard], data : {role : "ROLE_USER"} },
+  {path:'calendar', component:CalendarAppComponent},
   
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'profile', component: ProfileComponent },
   { path :"404", component : NotAuthComponent},
   { path: 'login', component: LoginComponent },
+  { path: 'holiday', component: HolidaysComponent , canActivate : [AuthenticationGuard]},
   { path: 'register', component: RegistrationComponent },
   {path:"rh",component:RhDashboardComponent , canActivate : [AuthenticationGuard],
   children : [

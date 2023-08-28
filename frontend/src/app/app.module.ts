@@ -38,6 +38,7 @@ import { RegistrationComponent } from './views/registration-view/registration/re
 import { httpInterceptorProviders } from './shared/helpers/http.interceptor';
 import { ProfileComponent } from './views/profile-view/profile/profile.component';
 import { RhDashboardComponent } from './views/rh-dashboard/rh-dashboard.component';
+import { HolidaysComponent } from './views/holiday-view/holidays/holidays.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { RhDashboardComponent } from './views/rh-dashboard/rh-dashboard.componen
     LoginComponent,
     RegistrationComponent,
     ProfileComponent,
-    RhDashboardComponent
+    RhDashboardComponent,
+    HolidaysComponent
 
   ],
   imports: [
