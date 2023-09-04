@@ -39,6 +39,10 @@ import { httpInterceptorProviders } from './shared/helpers/http.interceptor';
 import { ProfileComponent } from './views/profile-view/profile/profile.component';
 import { RhDashboardComponent } from './views/rh-dashboard/rh-dashboard.component';
 import { HolidaysComponent } from './views/holiday-view/holidays/holidays.component';
+import { UserListComponent } from './views/user-view/user-list/user-list.component';
+import { UserDetailsComponent } from './views/user-view/user-details/user-details.component';
+import { UpdateUserComponent } from './views/user-view/update-user/update-user.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -65,10 +69,14 @@ import { HolidaysComponent } from './views/holiday-view/holidays/holidays.compon
     RegistrationComponent,
     ProfileComponent,
     RhDashboardComponent,
-    HolidaysComponent
+    HolidaysComponent,
+    UserListComponent,
+    UserDetailsComponent,
+    UpdateUserComponent
 
   ],
   imports: [
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,

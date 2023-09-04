@@ -1,0 +1,33 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="username">Nom d'utilisateur</label>
+      <input type="text" id="username" formControlName="username" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" id="email" formControlName="email" class="form-control">
+    </div>
+    <!-- Autres champs de l'utilisateur -->
+  
+    <div class="form-group">
+      <label for="teamId">Équipe</label>
+      <select id="teamId" formControlName="teamId" class="form-control">
+        <option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="siteId">Site</label>
+      <select id="siteId" formControlName="siteId" class="form-control">
+        <option *ngFor="let site of sites" [value]="site.id">{{ site.name }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="departmentId">Département</label>
+      <select id="departmentId" formControlName="departmentId" class="form-control">
+        <option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</option>
+      </select>
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+  </form>
+  
