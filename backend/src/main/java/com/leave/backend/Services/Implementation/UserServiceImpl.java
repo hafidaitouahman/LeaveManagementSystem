@@ -15,6 +15,7 @@ import com.leave.backend.Entities.LeaveRequest;
 import com.leave.backend.Entities.Site;
 import com.leave.backend.Entities.Team;
 import com.leave.backend.Entities.User;
+import com.leave.backend.Exceptions.LeaveQuotaNotFoundException;
 import com.leave.backend.Exceptions.TeamNotFoundException;
 import com.leave.backend.Exceptions.UserNotFoundException;
 import com.leave.backend.Repositories.DepartementRepository;
@@ -157,5 +158,15 @@ public class UserServiceImpl implements UserService {
             return userRepository.findById(userId)  
             .orElseThrow(() -> new UserNotFoundException("not found"));
         }
-
+        @Override
+        public List<User> getUsersByLeaveQuota(LeaveQuota leaveQuota) throws LeaveQuotaNotFoundException {
+            List<User> users = userRepository.findByLeaveQuotaId(leaveQuota.getId());
+        
+            if (users.isEmpty()) {
+                throw new LeaveQuotaNotFoundException("Leave quota not found");
+            }
+        
+            return users;
+        }
+        
         }

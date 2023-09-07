@@ -7,6 +7,7 @@ import java.util.Optional;
 import com.leave.backend.Entities.LeaveQuota;
 import com.leave.backend.Entities.LeaveRequest;
 import com.leave.backend.Entities.User;
+import com.leave.backend.Exceptions.LeaveQuotaNotFoundException;
 import com.leave.backend.Exceptions.UserNotFoundException;
 
 public interface UserService {
@@ -20,5 +21,5 @@ public interface UserService {
      User getUserById(Long userId);
      List<User> findUsersByIds(List<Long> userIds);
      User findUserById(Long userId) throws UserNotFoundException;
-
+     List<User> getUsersByLeaveQuota(LeaveQuota leaveQuota) throws LeaveQuotaNotFoundException;
 }

@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.leave.backend.Dtos.LeaveQuotaDTO;
+import com.leave.backend.Dtos.UserDTO;
 import com.leave.backend.Entities.LeaveQuota;
 import com.leave.backend.Entities.User;
 import com.leave.backend.Exceptions.LeaveQuotaNotFoundException;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/leavequotas")
@@ -42,13 +44,22 @@ public class LeaveQuotaController {
         return new ResponseEntity<>(leaveQuotas, HttpStatus.OK);
     }
 
+    // @GetMapping("/{id}")
+    // public ResponseEntity<LeaveQuota> getLeaveQuotaById(@PathVariable int id) {
+    //     Optional<LeaveQuota> leaveQuota = leaveQuotaService.getLeaveQuotaById(id);
+    //     return leaveQuota.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+    //             .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    // }
     @GetMapping("/{id}")
-    public ResponseEntity<LeaveQuota> getLeaveQuotaById(@PathVariable int id) {
-        Optional<LeaveQuota> leaveQuota = leaveQuotaService.getLeaveQuotaById(id);
-        return leaveQuota.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<LeaveQuota> getLeaveQuotaById(@PathVariable int id) throws LeaveQuotaNotFoundException {
+        LeaveQuota leaveQuota = leaveQuotaService.getLeaveQuotaById(id);
+        if (leaveQuota != null) {
+            return new ResponseEntity<>(leaveQuota, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
-
+    
     // @PostMapping("/add")
     // public ResponseEntity<LeaveQuota> createLeaveQuota(@RequestBody LeaveQuota leaveQuota) {
     //     LeaveQuota createdLeaveQuota = leaveQuotaService.createLeaveQuota(leaveQuota);
@@ -89,6 +100,25 @@ public ResponseEntity<List<LeaveQuota>> getLeaveQuotaByUser(@PathVariable Long u
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
+@GetMapping("/{quotaId}/users")
+    public ResponseEntity<List<String>> getUsersByLeaveQuota(@PathVariable int quotaId) {
+        try {
+           LeaveQuota leaveQuota = leaveQuotaService.getLeaveQuotaById(quotaId);
+
+            if (leaveQuota != null) {
+                List<User> users = userService.getUsersByLeaveQuota(leaveQuota);
+                List<String> userNames = users.stream()
+                        .map(User::getUsername) // Assuming "getUsername" returns the user's name.
+                        .collect(Collectors.toList());
+
+                return new ResponseEntity<>(userNames, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
 

@@ -6,6 +6,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.leave.backend.Enumeration.Status;
 
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,10 +32,13 @@ public class LeaveRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
    
     private int id;
+    @NotNull(message = "Check-in date must not be null")
     private Date startDate;
+    @NotNull(message = "Check-in date must not be null")
     private Date endDate;
     private Status status;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Future(message = "Check-out date must be in the future")
     private Date creDate;
     private double duration;
     private String Comment;

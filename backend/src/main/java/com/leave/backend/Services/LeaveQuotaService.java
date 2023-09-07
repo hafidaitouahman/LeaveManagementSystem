@@ -16,7 +16,7 @@ public interface LeaveQuotaService {
     //  void deleteLeaveQuotaById(int id);
     //  LeaveQuotaDTO findLeaveQuotaById(int id) throws LeaveQuotaNotFoundException;
     List<LeaveQuota> getAllLeaveQuotas();
-    Optional<LeaveQuota> getLeaveQuotaById(int id);
+    LeaveQuota getLeaveQuotaById(int id) throws LeaveQuotaNotFoundException;
     LeaveQuota createLeaveQuota(LeaveQuota leaveQuota);
     LeaveQuota updateLeaveQuota(int id, LeaveQuota leaveQuota);
     void deleteLeaveQuota(int id);

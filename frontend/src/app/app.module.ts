@@ -43,6 +43,9 @@ import { UserListComponent } from './views/user-view/user-list/user-list.compone
 import { UserDetailsComponent } from './views/user-view/user-details/user-details.component';
 import { UpdateUserComponent } from './views/user-view/update-user/update-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { QuotaListComponent } from './views/quota-view/quota-list/quota-list.component';
+import { CreateQuotaComponent } from './views/quota-view/create-quota/create-quota.component';
+import { UpdateQuotaComponent } from './views/quota-view/update-quota/update-quota.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +75,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     HolidaysComponent,
     UserListComponent,
     UserDetailsComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    QuotaListComponent,
+    CreateQuotaComponent,
+    UpdateQuotaComponent
 
   ],
   imports: [

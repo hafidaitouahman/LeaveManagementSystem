@@ -42,8 +42,9 @@ public class LeaveQuotaServiceImpl implements LeaveQuotaService {
     }
 @Override
 
-    public Optional<LeaveQuota> getLeaveQuotaById(int id) {
-        return leaveQuotaRepository.findById(id);
+    public LeaveQuota getLeaveQuotaById(int id) throws LeaveQuotaNotFoundException {
+        return leaveQuotaRepository.findById(id)
+        .orElseThrow(() -> new LeaveQuotaNotFoundException("Leave quota not found"));
     }
 @Override
 

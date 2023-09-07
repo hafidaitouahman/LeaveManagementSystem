@@ -64,7 +64,13 @@ public class User {
 
   @OneToMany
   private List<LeaveRequest> leaveRequests;
-  
+  @ManyToMany
+  @JoinTable(
+      name = "user_quota", // Adjust the table name as needed
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "quota_id")
+  )
+  private Set<LeaveQuota> quotas = new HashSet<>();
   // public User() {
   // }
 

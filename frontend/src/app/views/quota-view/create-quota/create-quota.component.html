@@ -1,0 +1,94 @@
+<!-- <form [formGroup]="quotaForm" (ngSubmit)="createQuota()">
+    <label for="year">Year</label>
+    <input type="number" id="year" formControlName="year" required>
+  
+    <label for="quota">Quota</label>
+    <input type="number" id="quota" formControlName="quota" required>
+  
+    <label for="users">Users</label>
+    <select id="users" formControlName="users" multiple required>
+      <option *ngFor="let user of usersList" [value]="user.id">{{ user.username }}</option>
+    </select>
+  
+    <button type="submit">Create</button>
+  </form>
+   -->
+   <!-- Your HTML template for the create quota form -->
+
+
+<!-- <form [formGroup]="quotaForm">
+  <div class="form-group">
+    <label for="year">Year</label>
+    <input type="number" id="year" formControlName="year" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="quota">Quota</label>
+    <input type="number" id="quota" formControlName="quota" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="users">Select Users</label>
+    <select id="users" class="form-control" multiple (change)="onUserSelect($any($event.target).value)">
+      <option *ngFor="let user of usersList" [value]="user.id">{{ user.username }}</option>
+    </select>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="createQuota()">Create Quota</button>
+</form> -->
+
+
+
+<!-- 
+<form [formGroup]="quotaForm">
+  <label for="year">Year:</label>
+  <input type="number" id="year" formControlName="year" required />
+
+  <label for="quota">Quota:</label>
+  <input type="number" id="quota" formControlName="quota" required />
+
+  <div>
+    <label>Select Users:</label>
+
+    <div *ngFor="let user of usersList">
+      <input
+        type="checkbox"
+        id="user{{ user.id }}"
+        [value]="user.id"
+        formControlName="selectedUsers"
+      />
+      <label for="user{{ user.id }}">{{ user.username }}</label>
+    </div>
+  </div>
+
+  <button type="button" (click)="createQuota()">Create Quota</button>
+</form> -->
+
+
+<form [formGroup]="quotaForm">
+  <!-- Add input fields for year and quota -->
+  <div class="form-group">
+    <label for="year">Year:</label>
+    <input type="text" id="year" formControlName="year">
+  </div>
+  <div class="form-group">
+    <label for="quota">Quota:</label>
+    <input type="text" id="quota" formControlName="quota">
+  </div>
+
+  <!-- Checkbox menu for selecting users -->
+  <div class="form-group">
+    <label>Select Users:</label>
+    <div *ngFor="let user of usersList">
+      <label>
+        <input
+          type="checkbox"
+          [value]="user.id"
+          (change)="onUserSelect(user.id)"
+          [checked]="selectedUserIds.includes(user.id)"
+        >
+        {{ user.username }}
+      </label>
+    </div>
+  </div>
+
+  <!-- Button to create the quota -->
+  <button type="button" (click)="createQuota()">Create Quota</button>
+</form>

@@ -17,6 +17,7 @@ import { HolidaysComponent } from './views/holiday-view/holidays/holidays.compon
 import { UserListComponent } from './views/user-view/user-list/user-list.component';
 import { UserDetailsComponent } from './views/user-view/user-details/user-details.component';
 import { UpdateUserComponent } from './views/user-view/update-user/update-user.component';
+import { QuotaListComponent } from './views/quota-view/quota-list/quota-list.component';
 const routes: Routes = [
   //{ path: '', redirectTo: 'login', pathMatch: 'full' },
   
@@ -36,7 +37,8 @@ const routes: Routes = [
   {path:'site', component:SiteListComponent,canActivate : [AuthorizationGuard], data : {role : "ROLE_RH"}},
   { path: 'leavetypes', component: LeaveTypeListComponent ,canActivate : [AuthorizationGuard], data : {role : "ROLE_RH"}},
   { path: 'users', component: UserListComponent ,canActivate : [AuthorizationGuard], data : {role : "ROLE_RH"}},
- 
+  { path: 'leavequota', component: QuotaListComponent ,canActivate : [AuthorizationGuard], data : {role : "ROLE_RH"}},
+
 
 
   ]},
