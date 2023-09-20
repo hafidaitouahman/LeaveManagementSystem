@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class LeaveTypeDTO {
     
-    private int id;
+    private Long id;
 
     private String name;
 

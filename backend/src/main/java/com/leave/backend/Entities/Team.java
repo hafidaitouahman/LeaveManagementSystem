@@ -3,6 +3,7 @@ package com.leave.backend.Entities;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -14,6 +15,7 @@ import lombok.ToString;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 @Entity
 @Data
@@ -32,8 +34,9 @@ public class Team {
     private String name;
     // @OneToMany
     // private List<Employe> employes;
-    @ManyToOne
-    private Organisation organisation;
-
+    // @ManyToOne
+    // private Organisation organisation;
+    @OneToMany(mappedBy = "team",cascade = CascadeType.ALL)
+    private List<User> users;
    
 }

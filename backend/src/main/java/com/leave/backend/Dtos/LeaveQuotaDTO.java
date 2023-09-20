@@ -6,15 +6,24 @@ import lombok.Data;
 
 @Data
 public class LeaveQuotaDTO {
-    private int id;
-    private int year;
+    private String name;
     private double quota;
-    private Set<UserDTO> users;
-
-    // Getter et setter pour id, year, et quota
-    // Ajoutez la méthode setter pour la liste d'utilisateurs
-
-    public void setUsers(Set<UserDTO> list) {
-        this.users = list;
-    }
+    private String pays;
 }
+
+// import lombok.Data;
+
+// @Data
+// public class LeaveQuotaDTO {
+//     private int id;
+//     private int year;
+//     private double quota;
+//     private Set<UserDTO> users;
+
+//     // Getter et setter pour id, year, et quota
+//     // Ajoutez la méthode setter pour la liste d'utilisateurs
+
+//     public void setUsers(Set<UserDTO> list) {
+//         this.users = list;
+//     }
+// }

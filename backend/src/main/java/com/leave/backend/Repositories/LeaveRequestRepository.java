@@ -1,9 +1,12 @@
-// package com.leave.backend.Repositories;
+package com.leave.backend.Repositories;
 
-// import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-// import com.leave.backend.Entities.LeaveRequest;
+import com.leave.backend.Entities.LeaveRequest;
+import org.springframework.stereotype.Repository;
 
-// public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Integer>{
+
+@Repository
+public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Long>{
     
-// }
+}

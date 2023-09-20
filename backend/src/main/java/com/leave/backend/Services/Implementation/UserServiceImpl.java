@@ -5,8 +5,10 @@ import jakarta.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.leave.backend.Entities.Departement;
@@ -22,6 +24,7 @@ import com.leave.backend.Repositories.DepartementRepository;
 import com.leave.backend.Repositories.SiteRepository;
 import com.leave.backend.Repositories.TeamRepository;
 import com.leave.backend.Repositories.UserRepository;
+import com.leave.backend.Security.services.UserDetailsImpl;
 import com.leave.backend.Services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +41,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private SiteRepository siteRepository;
+
+
+
+ 
         @Override
         public List<User> getAllUsers() {
             return userRepository.findAll();
@@ -133,21 +140,21 @@ public class UserServiceImpl implements UserService {
             return userRepository.save(user);
         }
 
-        @Override
-        public  List<LeaveQuota> getQuotaByEmployeeId(Long employeeId) {
-            User user = userRepository.findById(employeeId)
-                    .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + employeeId));
+        // @Override
+        // public  List<LeaveQuota> getQuotaByEmployeeId(Long employeeId) {
+        //     User user = userRepository.findById(employeeId)
+        //             .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + employeeId));
 
-            return user.getLeaveQuotas();
-        }
+        //     return user.getLeaveQuotas();
+        // }
 
-        @Override
-        public List<LeaveRequest> getLeaveRequestsByEmployeeId(Long employeeId) {
-            User user = userRepository.findById(employeeId)
-                    .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + employeeId));
+        // @Override
+        // public List<LeaveRequest> getLeaveRequestsByEmployeeId(Long employeeId) {
+        //     User user = userRepository.findById(employeeId)
+        //             .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + employeeId));
 
-            return user.getLeaveRequests();
-        }
+        //     return user.getLeaveRequests();
+        // }
         @Override
         public List<User> findUsersByIds(List<Long> userIds) {
             // Use the UserRepository to fetch users by their IDs
@@ -158,15 +165,25 @@ public class UserServiceImpl implements UserService {
             return userRepository.findById(userId)  
             .orElseThrow(() -> new UserNotFoundException("not found"));
         }
+        // @Override
+        // public List<User> getUsersByLeaveQuota(LeaveQuota leaveQuota) throws LeaveQuotaNotFoundException {
+        //     List<User> users = userRepository.findByLeaveQuotaId(leaveQuota.getId());
+        
+        //     if (users.isEmpty()) {
+        //         throw new LeaveQuotaNotFoundException("Leave quota not found");
+        //     }
+        
+        //     return users;
+        // }
         @Override
-        public List<User> getUsersByLeaveQuota(LeaveQuota leaveQuota) throws LeaveQuotaNotFoundException {
-            List<User> users = userRepository.findByLeaveQuotaId(leaveQuota.getId());
-        
-            if (users.isEmpty()) {
-                throw new LeaveQuotaNotFoundException("Leave quota not found");
-            }
-        
-            return users;
-        }
-        
+     public Long getUserIdFromUserDetails(UserDetails userDetails) {
+    if (userDetails instanceof UserDetailsImpl) {
+        UserDetailsImpl userDetailsImpl = (UserDetailsImpl) userDetails;
+        return userDetailsImpl.getId();
+    } else {
+        // Gérez le cas où l'objet UserDetails n'est pas une instance de UserDetailsImpl
+        return null;
+    }
+}
+
         }

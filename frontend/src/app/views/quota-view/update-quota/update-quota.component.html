@@ -1,1 +1,21 @@
-<p>update-quota works!</p>
+<h3>Update Quota</h3>
+<div style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="quota.name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="quota">quota</label>
+      <input type="text" class="form-control" id="quota" required [(ngModel)]="quota.quota" name="quota">
+    </div>
+
+    <div class="form-group">
+      <label for="pays">pays</label>
+      <input type="text" class="form-control" id="pays" required [(ngModel)]="quota.pays" name="pays">
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>

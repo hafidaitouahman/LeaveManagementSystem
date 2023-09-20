@@ -14,25 +14,25 @@ import java.util.stream.Collectors;
 @Component
 public class LeaveQuotaMapper {
 
-    private final UserMapper userMapper; // Assurez-vous d'avoir un mapper pour UserDTO
+    // private final UserMapper userMapper; // Assurez-vous d'avoir un mapper pour UserDTO
 
-    public LeaveQuotaMapper(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
+    // public LeaveQuotaMapper(UserMapper userMapper) {
+    //     this.userMapper = userMapper;
+    // }
 
-    public LeaveQuotaDTO fromLeaveQuota(LeaveQuota leaveQuota) {
-        LeaveQuotaDTO leaveQuotaDTO = new LeaveQuotaDTO();
-        BeanUtils.copyProperties(leaveQuota, leaveQuotaDTO);
-        // Mapper la liste d'utilisateurs ici
-        leaveQuotaDTO.setUsers(userMapper.fromUsers(leaveQuota.getUsers()));
-        return leaveQuotaDTO;
-    }
+    // public LeaveQuotaDTO fromLeaveQuota(LeaveQuota leaveQuota) {
+    //     LeaveQuotaDTO leaveQuotaDTO = new LeaveQuotaDTO();
+    //     BeanUtils.copyProperties(leaveQuota, leaveQuotaDTO);
+    //     // Mapper la liste d'utilisateurs ici
+    //     leaveQuotaDTO.setUsers(userMapper.fromUsers(leaveQuota.getUsers()));
+    //     return leaveQuotaDTO;
+    // }
 
-    public LeaveQuota fromLeaveQuotaDTO(LeaveQuotaDTO leaveQuotaDTO) {
-        LeaveQuota leaveQuota = new LeaveQuota();
-        BeanUtils.copyProperties(leaveQuotaDTO, leaveQuota);
-        // Mapper la liste d'utilisateurs ici
-        leaveQuota.setUsers(userMapper.toUsers(leaveQuotaDTO.getUsers()));
-        return leaveQuota;
-    }
+    // public LeaveQuota fromLeaveQuotaDTO(LeaveQuotaDTO leaveQuotaDTO) {
+    //     LeaveQuota leaveQuota = new LeaveQuota();
+    //     BeanUtils.copyProperties(leaveQuotaDTO, leaveQuota);
+    //     // Mapper la liste d'utilisateurs ici
+    //     leaveQuota.setUsers(userMapper.toUsers(leaveQuotaDTO.getUsers()));
+    //     return leaveQuota;
+    // }
 }

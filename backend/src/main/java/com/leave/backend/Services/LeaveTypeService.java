@@ -7,8 +7,8 @@ import com.leave.backend.Exceptions.LeaveTypeNotFoundException;
 
 public interface LeaveTypeService {
     LeaveTypeDTO addLeaveType(LeaveTypeDTO leaveTypeDTO);
-    LeaveTypeDTO updateLeaveType(int id,LeaveTypeDTO leaveTypeDTO) throws LeaveTypeNotFoundException;
+    LeaveTypeDTO updateLeaveType(Long id,LeaveTypeDTO leaveTypeDTO) throws LeaveTypeNotFoundException;
          List<LeaveTypeDTO> getAllLeaveTypes();
-     void deleteLeaveTypeById(int id);
-     LeaveTypeDTO findById(int id) throws LeaveTypeNotFoundException;
+     void deleteLeaveTypeById(Long id);
+     LeaveTypeDTO findById(Long id) throws LeaveTypeNotFoundException;
 }

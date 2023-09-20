@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.leave.backend.Entities.User;
+import com.leave.backend.Exceptions.UserNotFoundException;
 import com.leave.backend.Repositories.UserRepository;
 
 

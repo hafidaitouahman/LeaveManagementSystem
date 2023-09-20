@@ -25,11 +25,11 @@ export class QuotaListComponent {
   
 
   reloadData() {
-    this.quotas = this.quotaService.getQuotasList();
+    this.quotas = this.quotaService.getAllLeaveQuotas();
   }
 
   deleteQuota(id: number) {
-    this.quotaService.deleteQuota(id)
+    this.quotaService.deleteLeaveQuota(id)
       .subscribe(
         data => {
           console.log(data);
@@ -37,16 +37,16 @@ export class QuotaListComponent {
         },
         error => console.log(error));
   }
-  getQuota(id:number){
-    this.quotaService.getQuota(id)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.reloadData();
-      },
-      error => console.log(error));
+  // getQuota(id:number){
+  //   this.quotaService.getQuota(id)
+  //   .subscribe(
+  //     data => {
+  //       console.log(data);
+  //       this.reloadData();
+  //     },
+  //     error => console.log(error));
 
-  }
+  // }
 
   openCreateEventModal(): void {
     const modalRef = this.modal.open(CreateQuotaComponent);
@@ -68,17 +68,17 @@ export class QuotaListComponent {
   }
 
 
-  showUsernames(quotaId: number): void {
-    if (this.selectedQuotaId === quotaId) {
-      // If the same button is clicked again, hide the usernames.
-      this.selectedQuotaId = null;
-      this.quotaUsernames = [];
-    } else {
-      // Fetch and display usernames for the selected quota.
-      this.quotaService.getQuota(quotaId).subscribe(usernames => {
-        this.selectedQuotaId = quotaId;
-        this.quotaUsernames = usernames;
-      });
-    }
-  }
+  // showUsernames(quotaId: number): void {
+  //   if (this.selectedQuotaId === quotaId) {
+  //     // If the same button is clicked again, hide the usernames.
+  //     this.selectedQuotaId = null;
+  //     this.quotaUsernames = [];
+  //   } else {
+  //     // Fetch and display usernames for the selected quota.
+  //     this.quotaService.getQuota(quotaId).subscribe(usernames => {
+  //       this.selectedQuotaId = quotaId;
+  //       this.quotaUsernames = usernames;
+  //     });
+  //   }
+  // }
 }

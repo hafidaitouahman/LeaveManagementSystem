@@ -10,25 +10,27 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Year</th>
+            <th>Nom</th>
+            <th>Pays</th>
             <th>Quota</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let quota of quotas | async">
-            <td>{{quota.year}}</td>
+            <td>{{quota.name}}</td>
+            <td>{{quota.pays}}</td>
             <td>{{quota.quota}}</td>
             <td><button (click)="deleteQuota(quota.id)" class="btn btn-danger">Delete</button>
               <button mat-raised-button color="accent" (click)="openUpdateEventModal(quota.id)">Update</button>
-              <button (click)="showUsernames(quota.id)">Show Usernames</button>            
+              <!-- <button (click)="showUsernames(quota.id)">Show Usernames</button>             -->
             </td>
-            <div *ngIf="quota.id === selectedQuotaId">
+            <!-- <div *ngIf="quota.id === selectedQuotaId">
               <p>Usernames:</p>
               <ul>
                 <li *ngFor="let username of quotaUsernames">{{ username }}</li>
               </ul>
-            </div>
+            </div> -->
           </tr>
         </tbody>
       </table>

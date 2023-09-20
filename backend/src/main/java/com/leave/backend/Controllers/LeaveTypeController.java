@@ -34,7 +34,7 @@ public class LeaveTypeController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('RH')")
-    public LeaveTypeDTO updateLeaveType(@PathVariable int id,@RequestBody LeaveTypeDTO leaveTypeDTO)throws LeaveTypeNotFoundException{
+    public LeaveTypeDTO updateLeaveType(@PathVariable Long id,@RequestBody LeaveTypeDTO leaveTypeDTO)throws LeaveTypeNotFoundException{
         return leaveTypeService.updateLeaveType(id,leaveTypeDTO);
     }
     @GetMapping("/all")
@@ -44,13 +44,13 @@ public class LeaveTypeController {
     }
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('RH')")
-    public void deleteLeaveTypeById(@PathVariable int id){
+    public void deleteLeaveTypeById(@PathVariable Long id){
         leaveTypeService.deleteLeaveTypeById(id);
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('RH')")
-    public LeaveTypeDTO getById(@PathVariable int id) throws LeaveTypeNotFoundException {
+    public LeaveTypeDTO getById(@PathVariable Long id) throws LeaveTypeNotFoundException {
         return leaveTypeService.findById(id);
     }
     

@@ -1,7 +1,9 @@
 export class Quota{
     id!: number;
-    year!: number;
+    name!: String; 
     quota!: number;
-    users!: number[]; // Array of user IDs
+    pays!: String;
+  
+   // users!: number[]; // Array of user IDs
 
 }

@@ -248,6 +248,14 @@
 <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
 
 
+<dependency>
+    <groupId>org.mapstruct</groupId>
+    <artifactId>mapstruct-processor</artifactId>
+    <version>1.4.2.Final</version> <!-- Use the version that matches your MapStruct version -->
+    <scope>provided</scope>
+</dependency>
+
+
 
 	</dependencies>
 	<build>

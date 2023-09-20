@@ -38,7 +38,7 @@ public class LeaveTypeServiceImpl implements LeaveTypeService {
     }
 
     @Override
-    public LeaveTypeDTO updateLeaveType( int id,LeaveTypeDTO leaveTypeDTO) throws LeaveTypeNotFoundException{
+    public LeaveTypeDTO updateLeaveType( Long id,LeaveTypeDTO leaveTypeDTO) throws LeaveTypeNotFoundException{
 
           LeaveType leaveType = leaveTypeRepository.findById(id)
          .orElseThrow(() -> new LeaveTypeNotFoundException("not found"));
@@ -69,7 +69,7 @@ public class LeaveTypeServiceImpl implements LeaveTypeService {
     }
     
     @Override
-     public void deleteLeaveTypeById(int id){
+     public void deleteLeaveTypeById(Long id){
         Optional<LeaveType> OptionalLeaveType = leaveTypeRepository.findById(id);
 
         LeaveType leaveType = OptionalLeaveType.get();
@@ -82,7 +82,7 @@ public class LeaveTypeServiceImpl implements LeaveTypeService {
      }
 
      @Override
-     public LeaveTypeDTO findById(int id) throws LeaveTypeNotFoundException{
+     public LeaveTypeDTO findById(Long id) throws LeaveTypeNotFoundException{
          LeaveType leaveType = leaveTypeRepository.findById(id)
          .orElseThrow(() -> new LeaveTypeNotFoundException("not found"));
                  

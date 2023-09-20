@@ -62,33 +62,46 @@
 </form> -->
 
 
-<form [formGroup]="quotaForm">
-  <!-- Add input fields for year and quota -->
+<!-- <form [formGroup]="quotaForm">
   <div class="form-group">
-    <label for="year">Year:</label>
-    <input type="text" id="year" formControlName="year">
+    <label for="name">Nom:</label>
+    <input type="text" id="name" formControlName="name">
+  </div>
+  
+  <div class="form-group">
+    <label for="pays">Pays:</label>
+    <input type="text" id="pays" formControlName="pays">
   </div>
   <div class="form-group">
     <label for="quota">Quota:</label>
     <input type="text" id="quota" formControlName="quota">
   </div>
 
-  <!-- Checkbox menu for selecting users -->
-  <div class="form-group">
-    <label>Select Users:</label>
-    <div *ngFor="let user of usersList">
-      <label>
-        <input
-          type="checkbox"
-          [value]="user.id"
-          (change)="onUserSelect(user.id)"
-          [checked]="selectedUserIds.includes(user.id)"
-        >
-        {{ user.username }}
-      </label>
-    </div>
-  </div>
 
-  <!-- Button to create the quota -->
+
   <button type="button" (click)="createQuota()">Create Quota</button>
-</form>
+</form> -->
+<h3>Create LeaveType</h3>
+<button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+<div [hidden]="submitted" style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="quota.name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="quota">quota</label>
+      <input type="text" class="form-control" id="quota" required [(ngModel)]="quota.quota" name="quota">
+    </div>
+
+    <div class="form-group">
+      <label for="pays">pays</label>
+      <input type="text" class="form-control" id="pays" required [(ngModel)]="quota.pays" name="pays">
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>

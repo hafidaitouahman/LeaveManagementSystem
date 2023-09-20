@@ -19,7 +19,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
   Boolean existsByUsername(String username);
 
   Boolean existsByEmail(String email);
-  @Query("SELECT u FROM User u JOIN u.quotas q WHERE q.id = :leaveQuotaId")
-  List<User> findByLeaveQuotaId(@Param("leaveQuotaId") int leaveQuotaId);
-  
+  // @Query("SELECT u FROM User u JOIN u.quotas q WHERE q.id = :leaveQuotaId")
+  // List<User> findByLeaveQuotaId(@Param("leaveQuotaId") Long leaveQuotaId);
+  List<User> findByPays(String pays);
+
 }
