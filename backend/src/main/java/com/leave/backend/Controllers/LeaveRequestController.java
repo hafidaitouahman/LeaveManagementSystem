@@ -48,7 +48,19 @@ public class LeaveRequestController {
         // Appelez la méthode de calcul des jours planifiés en utilisant les dates fournies
         return calculatePlannedDays(startDate, endDate);
     }
+    @GetMapping("/pending/{userId}")
+    @PreAuthorize("hasRole('RH')")
+    public ResponseEntity<List<LeaveRequestDTOResponse>> getPendingLeaveRequestsByUserId(@PathVariable Long userId) {
+        List<LeaveRequestDTOResponse> leaveRequests = leaveRequestService.getPendingLeaveRequestsByUserId(userId);
+        return ResponseEntity.ok(leaveRequests);
+    }
 
+    @GetMapping("/histo/{userId}")
+    @PreAuthorize("hasRole('RH')")
+    public ResponseEntity<List<LeaveRequestDTOResponse>> getLeaveRequestsByUserId(@PathVariable Long userId) {
+        List<LeaveRequestDTOResponse> leaveRequests = leaveRequestService.getLeaveRequestsByUserId(userId);
+        return ResponseEntity.ok(leaveRequests);
+    }
     @GetMapping("/pending")
     @PreAuthorize("hasRole('RH')")
 public ResponseEntity<List<LeaveRequestDTOResponse>> getPendingLeaveRequests() {

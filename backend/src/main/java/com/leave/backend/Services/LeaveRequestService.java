@@ -33,6 +33,7 @@ LeaveRequest getLeaveRequestById(Long leaveRequestId) throws LeaveRequestNotFoun
  throws LeaveRequestNotFoundException, UserNotFoundException, InsufficientLeaveQuotaException,AccessDeniedException,LeaveTypeNotFoundException;
  List<LeaveRequestDTOResponse> getAllLeaveRequestsForUser(Long userId);
  List<LeaveRequestDTOResponse> getPendingLeaveRequests();
-
+ List<LeaveRequestDTOResponse> getLeaveRequestsByUserId(Long userId);
+ List<LeaveRequestDTOResponse> getPendingLeaveRequestsByUserId(Long userId);
 }
 

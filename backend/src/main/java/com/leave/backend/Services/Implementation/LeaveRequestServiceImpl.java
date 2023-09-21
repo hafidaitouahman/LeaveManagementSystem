@@ -112,6 +112,21 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
 //         return leaveRequestRepository.save(leaveRequest);
 //     }
+@Override
+public List<LeaveRequestDTOResponse> getPendingLeaveRequestsByUserId(Long userId) {
+    List<LeaveRequest> pendingLeaveRequests = leaveRequestRepository.findByUser_IdAndStatus(userId, Status.En_Attente);
+    return pendingLeaveRequests.stream()
+            .map(leaveRequestMapper::convertToDTO)
+            .collect(Collectors.toList());
+}
+
+@Override
+    public List<LeaveRequestDTOResponse> getLeaveRequestsByUserId(Long userId) {
+        List<LeaveRequest> leaveRequests = leaveRequestRepository.findByUserId(userId);
+        return leaveRequests.stream()
+                .map(leaveRequestMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
 
 @Override
 public List<LeaveRequestDTOResponse> getPendingLeaveRequests() {
