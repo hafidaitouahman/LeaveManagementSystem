@@ -3,6 +3,7 @@ package com.leave.backend.Services.Implementation;
 import org.springframework.security.access.AccessDeniedException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import com.leave.backend.Entities.LeaveRequest;
 import com.leave.backend.Entities.LeaveType;
 import com.leave.backend.Entities.User;
 import com.leave.backend.Entities.UserQuota;
+import com.leave.backend.Enumeration.Status;
 import com.leave.backend.Exceptions.EmployeNotFoundException;
 import com.leave.backend.Exceptions.InsufficientLeaveQuotaException;
 import com.leave.backend.Exceptions.LeaveRequestNotFoundException;
@@ -38,6 +40,7 @@ import com.leave.backend.Repositories.UserQuotaRepository;
 import com.leave.backend.Repositories.UserRepository;
 import com.leave.backend.Services.LeaveRequestService;
 //import com.leave.backend.mappers.LeaveRequestMapper;
+import com.leave.backend.mappers.LeaveRequestMapper;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -50,6 +53,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
     private final LeaveTypeRepository leaveTypeRepository;
     private final UserRepository userRepository;
     private final UserQuotaRepository userQuotaRepository;
+    private final LeaveRequestMapper leaveRequestMapper;
     //  @Autowired
     // private LeaveRequestMapper leaveRequestMapper;
     // public LeaveRequestDTOResponse mapLeaveRequestToDTO(LeaveRequest leaveRequest) {
@@ -109,6 +113,23 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 //         return leaveRequestRepository.save(leaveRequest);
 //     }
 
+@Override
+public List<LeaveRequestDTOResponse> getPendingLeaveRequests() {
+    List<LeaveRequest> pendingLeaveRequests = leaveRequestRepository.findByStatus(Status.En_Attente);
+    return pendingLeaveRequests.stream()
+            .map(leaveRequestMapper::convertToDTO) // Convert LeaveRequest entities to DTOs
+            .collect(Collectors.toList());
+}
+
+@Override
+public List<LeaveRequestDTOResponse> getAllLeaveRequestsForUser(Long userId) {
+    // Use userId to fetch all leave requests for that user from the repository
+    // You can then transform the entities to DTOs if needed
+    List<LeaveRequest> leaveRequests = leaveRequestRepository.findByUserId(userId);
+    return leaveRequests.stream()
+        .map(leaveRequestMapper::convertToDTO)
+        .collect(Collectors.toList());
+}
 @Override
 public LeaveRequestDTOResponse updateLeaveRequest(Long userId, Long leaveRequestId, LeaveRequestCreationDTO updateDTO)
         throws LeaveRequestNotFoundException, UserNotFoundException, InsufficientLeaveQuotaException, AccessDeniedException, LeaveTypeNotFoundException {
@@ -215,7 +236,7 @@ public LeaveRequestDTOResponse createLeaveRequest(LeaveRequestCreationDTO reques
     if (remainingQuota < duration) {
         throw new InsufficientLeaveQuotaException("Insufficient leave quota");
     }
-
+    LocalDateTime date=LocalDateTime.now();
     // Update the user's quota
     userQuota.setResiduel(userQuota.getResiduel() - duration);
 
@@ -228,7 +249,9 @@ public LeaveRequestDTOResponse createLeaveRequest(LeaveRequestCreationDTO reques
     leaveRequest.setEndDate(endDate);
     leaveRequest.setComment(requestDTO.getComment());
     leaveRequest.setDuration(duration);
-    leaveRequest.setStatus(requestDTO.getStatus()); // Set the status from the DTO
+    leaveRequest.setStatus(requestDTO.getStatus());
+    leaveRequest.setCreDate(LocalDateTime.now()); // Set creDate to the current date
+ // Set the status from the DTO
 
 
     LeaveRequest savedLeaveRequest = leaveRequestRepository.save(leaveRequest);
@@ -246,7 +269,7 @@ public LeaveRequestDTOResponse createLeaveRequest(LeaveRequestCreationDTO reques
     responseDTO.setLeaveTypeName(leaveType.getName());
     responseDTO.setComment(requestDTO.getComment());
     responseDTO.setStatus(savedLeaveRequest.getStatus()); // Set the status in the response DTO
-
+    responseDTO.setCreDate(LocalDateTime.now());
 
     return responseDTO;
 }

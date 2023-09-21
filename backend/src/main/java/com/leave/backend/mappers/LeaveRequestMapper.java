@@ -1,21 +1,45 @@
-// package com.leave.backend.mappers;
+package com.leave.backend.mappers;
 
-// import java.util.List;
+import java.util.List;
 
-// import org.mapstruct.Mapper;
-// import org.mapstruct.Mapping;
-// import org.mapstruct.Named;
-// import org.mapstruct.factory.Mappers;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Service;
 
-// import com.leave.backend.Dtos.LeaveRequestDTOResponse;
-// import com.leave.backend.Entities.LeaveRequest;
-// import com.leave.backend.Entities.User;
+import com.leave.backend.Dtos.LeaveRequestDTOResponse;
+import com.leave.backend.Entities.LeaveRequest;
+import com.leave.backend.Entities.User;
 
-// import java.util.Set;
-// import java.util.stream.Collectors;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-// @Mapper
-// public interface LeaveRequestMapper {
+@Service
+public class LeaveRequestMapper {
+
+    public LeaveRequestDTOResponse convertToDTO(LeaveRequest leaveRequest) {
+        LeaveRequestDTOResponse responseDTO = new LeaveRequestDTOResponse();
+        responseDTO.setFrom(leaveRequest.getStartDate());
+        responseDTO.setTo(leaveRequest.getEndDate());
+        responseDTO.setDuration(leaveRequest.getDuration());
+        responseDTO.setPlannedDays(leaveRequest.getPlannedDays());
+        responseDTO.setRequesterUsername(leaveRequest.getUser().getUsername());
+        responseDTO.setApproverUsername(leaveRequest.getApprover().getUsername());
+    
+        List<String> replacementUsernames = leaveRequest.getReplacements().stream()
+                .map(User::getUsername)
+                .collect(Collectors.toList());
+        responseDTO.setReplacementUsernames(replacementUsernames);
+    
+        responseDTO.setLeaveTypeName(leaveRequest.getLeaveType().getName());
+        responseDTO.setComment(leaveRequest.getComment());
+        responseDTO.setCreDate(leaveRequest.getCreDate());
+        responseDTO.setStatus(leaveRequest.getStatus());
+        return responseDTO;
+    }
+    
+}
 
 //     LeaveRequestMapper INSTANCE = Mappers.getMapper(LeaveRequestMapper.class);
 

@@ -1,6 +1,7 @@
 package com.leave.backend.Dtos;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.leave.backend.Enumeration.Status;
@@ -18,6 +19,7 @@ public class LeaveRequestDTOResponse {
     private String leaveTypeName; // Nom du type de congé
     private String comment;
     private Status status;
+    private LocalDateTime creDate;
 
 
     // Constructors, getters, and setters

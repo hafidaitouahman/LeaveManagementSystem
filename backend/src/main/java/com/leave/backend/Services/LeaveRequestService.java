@@ -31,5 +31,8 @@ LeaveRequest getLeaveRequestById(Long leaveRequestId) throws LeaveRequestNotFoun
  List<LeaveRequest> getAllLeaveRequests();
  LeaveRequestDTOResponse updateLeaveRequest(Long userId, Long leaveRequestId, LeaveRequestCreationDTO updateDTO)
  throws LeaveRequestNotFoundException, UserNotFoundException, InsufficientLeaveQuotaException,AccessDeniedException,LeaveTypeNotFoundException;
+ List<LeaveRequestDTOResponse> getAllLeaveRequestsForUser(Long userId);
+ List<LeaveRequestDTOResponse> getPendingLeaveRequests();
+
 }
 

@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,6 +49,24 @@ public class LeaveRequestController {
         return calculatePlannedDays(startDate, endDate);
     }
 
+    @GetMapping("/pending")
+    @PreAuthorize("hasRole('RH')")
+public ResponseEntity<List<LeaveRequestDTOResponse>> getPendingLeaveRequests() {
+    List<LeaveRequestDTOResponse> pendingLeaveRequests = leaveRequestService.getPendingLeaveRequests();
+    return ResponseEntity.ok(pendingLeaveRequests);
+}
+
+    @GetMapping("/user")
+    public ResponseEntity<List<LeaveRequestDTOResponse>> getAllLeaveRequestsForCurrentUser(
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        try {
+            Long userId = userDetails.getId();
+            List<LeaveRequestDTOResponse> leaveRequests = leaveRequestService.getAllLeaveRequestsForUser(userId);
+            return ResponseEntity.ok(leaveRequests);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
     @PutMapping("/{leaveRequestId}")
     public ResponseEntity<?> updateLeaveRequest(

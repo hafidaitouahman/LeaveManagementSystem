@@ -1,6 +1,7 @@
 package com.leave.backend.Entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -45,8 +46,7 @@ public class LeaveRequest {
     private LocalDate endDate;
     private Status status;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Future(message = "Check-out date must be in the future")
-    private LocalDate creDate;
+    private LocalDateTime creDate;
     private double duration;
     private String Comment;
    @ManyToMany
