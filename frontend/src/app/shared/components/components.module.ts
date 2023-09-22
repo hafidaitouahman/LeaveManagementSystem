@@ -11,7 +11,7 @@ import { NotAuthComponent } from './not-auth/not-auth.component';
     HeaderTopComponent,
     SidebarComponent,
     NotAuthComponent
-  ],
+    ],
   imports: [
     CommonModule,
     SharedMaterialModule

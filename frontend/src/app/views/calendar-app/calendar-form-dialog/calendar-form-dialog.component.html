@@ -116,17 +116,18 @@
       
     </div>
   </div> -->
-  <div class="modal-header">
+  <!-- <div class="modal-header">
     <h4 class="modal-title">Create Leave Request</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <!-- Add your form fields for leave request details here -->
     <input type="datetime-local" [(ngModel)]="eventStart" placeholder="Start Date" />
     <input type="datetime-local" [(ngModel)]="eventEnd" placeholder="End Date" />
-    <!-- <textarea [(ngModel)]="comment" placeholder="Comment"></textarea>
+    
+
+    <textarea [(ngModel)]="comment" placeholder="Comment"></textarea>
     <select [(ngModel)]="eventType">
       <option value="sick">Sick Leave</option>
       <option value="vacation">Vacation Leave</option>
@@ -137,9 +138,61 @@
     </select>
     <select [(ngModel)]="remplacant">
       <option value="remplacantName">Remplacant</option>
-    </select> -->
+    </select>
+
+
+
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="createEvent()">Create</button>
+  </div>
+   -->
+
+
+   <div class="modal-header">
+    <h4 class="modal-title">Créer une demande de congé</h4>
+    <button type="button" class="close" aria-label="Fermer" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="leaveRequestForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="leaveType">Type de congé</label>
+        <select formControlName="leaveTypeId" id="leaveType" class="form-control" required>
+          <option value="" disabled>Choisissez un type de congé</option>
+          <option *ngFor="let leaveType of leaveTypes" [value]="leaveType.id">{{ leaveType.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="approver">Approbateur</label>
+        <select formControlName="approverId" id="approver" class="form-control" required>
+          <option value="" disabled>Choisissez un approbateur</option>
+          <option *ngFor="let approver of approvers" [value]="approver.id">{{ approver.username }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="replacement">Remplaçants</label>
+        <select formControlName="replacementIds" id="replacement" class="form-control" multiple>
+          <option *ngFor="let replacement of replacements" [value]="replacement.id">{{ replacement.username }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="startDate">Date de début</label>
+        <input formControlName="startDate" type="date" id="startDate" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="endDate">Date de fin</label>
+        <input formControlName="endDate" type="date" id="endDate" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="comment">Commentaire</label>
+        <textarea formControlName="comment" id="comment" class="form-control"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Annuler</button>
+        <button type="submit" class="btn btn-primary">Créer</button>
+      </div>
+    </form>
   </div>
   

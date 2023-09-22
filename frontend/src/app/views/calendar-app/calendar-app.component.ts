@@ -154,6 +154,8 @@ import {
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
 import { HolidaysService } from '../holiday-view/holidays.service';
+import { LeaveRequestService } from './leave-request.service';
+import { pendingLeaveRequests } from 'src/app/shared/models/pendingLeaveRequests.module';
 const colors: Record<string, EventColor> = {
   red: {
     primary: '#ad2121',
@@ -223,25 +225,48 @@ export class CalendarAppComponent {
   refresh = new Subject<void>();
 
   events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: { ...colors['red'] },
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    }
+    // {
+    //   start: subDays(startOfDay(new Date()), 1),
+    //   end: addDays(new Date(), 1),
+    //   title: 'A 3 day event',
+    //   color: { ...colors['red'] },
+    //   actions: this.actions,
+    //   allDay: true,
+    //   resizable: {
+    //     beforeStart: true,
+    //     afterEnd: true,
+    //   },
+    //   draggable: true,
+    // }
   ];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal,private holidaysService:HolidaysService ) {}
+  constructor(private modal: NgbModal,private holidaysService:HolidaysService,private leaveRequestService: LeaveRequestService ) {}
   ngOnInit(): void {
+    this.leaveRequestService.getAllLeaveRequestsForCurrentUser().subscribe(
+      (leaveRequests: pendingLeaveRequests[]) => {
+        this.events = leaveRequests.map((leaveRequest: pendingLeaveRequests) => {
+          return {
+            title: leaveRequest.leaveTypeName, // Utilisez le nom du type de congé ou une autre information pertinente
+            start: new Date(leaveRequest.from), // Remplacez par la date de début de la demande
+            end: new Date(leaveRequest.to), // Remplacez par la date de fin de la demande
+            color: colors['yellow'], // Vous pouvez personnaliser la couleur
+            draggable: false, // Réglez selon vos besoins
+            resizable: {
+              beforeStart: false,
+              afterEnd: false,
+            },
+          };
+        });
+      },
+      (error) => {
+        // Gérez les erreurs ici, par exemple, affichez un message d'erreur.
+        console.error('Erreur lors du chargement des demandes de congé :', error);
+      }
+    );
+
+    //Appel Holiday's API
     this.holidaysService.getHolidays().subscribe(data => {
       const holidays = data.map(holiday => {
         return {
@@ -298,22 +323,22 @@ export class CalendarAppComponent {
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors['red'],
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
+  // addEvent(): void {
+  //   this.events = [
+  //     ...this.events,
+  //     {
+  //       title: 'New event',
+  //       start: startOfDay(new Date()),
+  //       end: endOfDay(new Date()),
+  //       color: colors['red'],
+  //       draggable: true,
+  //       resizable: {
+  //         beforeStart: true,
+  //         afterEnd: true,
+  //       },
+  //     },
+  //   ];
+  // }
 
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);

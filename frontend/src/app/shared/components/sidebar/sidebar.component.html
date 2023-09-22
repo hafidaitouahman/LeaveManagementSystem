@@ -1,4 +1,4 @@
-<div class="sidebar_menu" [@onSideNavChange]="sidebarState" >
+<div class="sidebar_menu" [@onSideNavChange]="sidebarState" *ngIf="showAdminBoard" >
   <mat-nav-list class="menu-list">
     <mat-divider></mat-divider>
 
@@ -31,4 +31,23 @@
       <span class="label" [@labelAnimation]="sidebarState">Types de Congés</span>
     </a>
 </mat-nav-list>
+</div>
+
+<div class="sidebar_menu" [@onSideNavChange]="sidebarState" *ngIf="showUserBoard">
+  <!-- Votre menu utilisateur ici -->
+
+  <div class="leave-requests">
+    <h5>Demandes en attente</h5>
+    <a>
+      <li *ngFor="let request of leaveRequests" class="leave-request">
+        <div class="leave-request-details">
+          <p class="leave-type">{{ request.leaveTypeName }}</p>
+          <p class="duration">{{ request.duration }} jours</p>
+          <p class="date-range">{{ request.from | date }} - {{ request.to | date }}</p>
+        </div>
+      </li>
+    </a>
+  </div>
+  
+
 </div>

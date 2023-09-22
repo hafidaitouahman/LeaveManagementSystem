@@ -18,12 +18,13 @@ import { UserListComponent } from './views/user-view/user-list/user-list.compone
 import { UserDetailsComponent } from './views/user-view/user-details/user-details.component';
 import { UpdateUserComponent } from './views/user-view/update-user/update-user.component';
 import { QuotaListComponent } from './views/quota-view/quota-list/quota-list.component';
+import { UserDashboardComponent } from './views/user-dashboard/user-dashboard.component';
 const routes: Routes = [
   //{ path: '', redirectTo: 'login', pathMatch: 'full' },
   
   
   {path:'calendar', component:CalendarAppComponent},
-  
+  {path:'user',component:UserDashboardComponent , canActivate : [AuthenticationGuard], data : {role : "ROLE_USER"}  },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'profile', component: ProfileComponent },
   { path :"404", component : NotAuthComponent},

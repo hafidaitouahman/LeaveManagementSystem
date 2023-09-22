@@ -39,6 +39,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -82,7 +83,11 @@ public class UserController {
   @Autowired
   JwtUtils jwtUtils;
 
-
+  @GetMapping("/rh")
+  public ResponseEntity<List<User>> getRHApprovers() {
+      List<User> rhApprovers = userService.getRHApprovers();
+      return ResponseEntity.ok(rhApprovers);
+  }
     @PostMapping("/add")
 public ResponseEntity<?> addUserByRH(@Valid @RequestBody AddUserRequest addUserRequest) {
     // Vérifiez si l'utilisateur actuel a le rôle "RH"
@@ -184,6 +189,31 @@ public ResponseEntity<?> getUserById(@PathVariable Long userId) {
 
     return ResponseEntity.ok(userDetailsResponse);
 }
+@GetMapping("/all")
+public ResponseEntity<List<UserDetailsResponse>> getAllUsers() {
+    List<User> users = userRepository.findAll();
+    List<UserDetailsResponse> userDetailsResponses = new ArrayList<>();
+
+    for (User user : users) {
+        String departementName = user.getDepartement() != null ? user.getDepartement().getName() : "";
+        String teamName = user.getTeam() != null ? user.getTeam().getName() : "";
+        String siteName = user.getSite() != null ? user.getSite().getName() : "";
+
+        UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
+        userDetailsResponse.setId(user.getId());
+        userDetailsResponse.setUsername(user.getUsername());
+        userDetailsResponse.setEmail(user.getEmail());
+        userDetailsResponse.setPays(user.getPays());
+        userDetailsResponse.setDepartementName(departementName);
+        userDetailsResponse.setTeamName(teamName);
+        userDetailsResponse.setSiteName(siteName);
+        userDetailsResponse.setHirDate(user.getHirDate()); // Définissez hirDate
+
+        userDetailsResponses.add(userDetailsResponse);
+    }
+
+    return ResponseEntity.ok(userDetailsResponses);
+}
 
 //  @GetMapping("/all")
 //     public ResponseEntity<List<UserDTO>> getAllUsers() {
@@ -193,11 +223,12 @@ public ResponseEntity<?> getUserById(@PathVariable Long userId) {
 //                 .collect(Collectors.toList());
 //         return ResponseEntity.ok(userDTOs);
 //     }
-    @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
-        return ResponseEntity.ok(users);
-    }
+    // @GetMapping("/all")
+
+    // public ResponseEntity<List<User>> getAllUsers() {
+    //     List<User> users = userService.getAllUsers();
+    //     return ResponseEntity.ok(users);
+    // }
     // @GetMapping("/{userId}")
     //     public ResponseEntity<User> getUserById(@PathVariable Long userId) {
     //         try {

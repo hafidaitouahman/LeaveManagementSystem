@@ -22,3 +22,51 @@
       color: #3f51b5 !important;
     }
   }
+  .leave-requests {
+    //display: flex;
+    flex-direction: column;
+    align-items: center;
+    //padding: 20px;
+  }
+  
+  .leave-request {
+    background-color: #f0f0f0;
+    margin-bottom: 10px;
+    padding: 10px;
+    //width: 300px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    //text-align: center;
+  }
+  
+  .leave-request p {
+    margin: 5px 0;
+  }
+  
+  .leave-request .leave-type {
+    font-weight: bold;
+    color: #007BFF; /* Couleur pour le type de congé */
+  }
+  
+  .leave-request .duration {
+    color: #28A745; /* Couleur pour la durée */
+  }
+  
+  .leave-request .date-range {
+    color: #DC3545; /* Couleur pour les dates de début et de fin */
+  }
+  
+/* Styles pour la barre latérale */
+// .sidebar_menu {
+//   width: 250px; /* Largeur fixe en pixels */
+//   /* Autres styles de la barre latérale */
+// }
+
+// /* Styles pour la section des demandes de congés */
+// .leave-requests {
+//   width: calc(100% - 250px); /* Largeur dynamique en fonction de la barre latérale */
+//   padding: 20px; /* Ajoutez une marge intérieure pour l'espacement */
+//   /* Autres styles pour la section des demandes de congés */
+// }

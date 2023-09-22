@@ -38,7 +38,7 @@ public class LeaveTypeController {
         return leaveTypeService.updateLeaveType(id,leaveTypeDTO);
     }
     @GetMapping("/all")
-    @PreAuthorize("hasRole('RH')")
+    @PreAuthorize("hasRole('USER') or hasRole('RH')")
     public List<LeaveTypeDTO> getAllLeaveTypes() {
         return leaveTypeService.getAllLeaveTypes();
     }

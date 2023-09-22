@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.leave.backend.Entities.ERole;
 import com.leave.backend.Entities.LeaveQuota;
+import com.leave.backend.Entities.Role;
 import com.leave.backend.Entities.User;
 
 
@@ -22,5 +24,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
   // @Query("SELECT u FROM User u JOIN u.quotas q WHERE q.id = :leaveQuotaId")
   // List<User> findByLeaveQuotaId(@Param("leaveQuotaId") Long leaveQuotaId);
   List<User> findByPays(String pays);
+  List<User> findByRoles_Name(ERole roleName);
+
 
 }

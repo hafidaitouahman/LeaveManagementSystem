@@ -46,6 +46,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { QuotaListComponent } from './views/quota-view/quota-list/quota-list.component';
 import { CreateQuotaComponent } from './views/quota-view/create-quota/create-quota.component';
 import { UpdateQuotaComponent } from './views/quota-view/update-quota/update-quota.component';
+import { UserDashboardComponent } from './views/user-dashboard/user-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -78,10 +79,11 @@ import { UpdateQuotaComponent } from './views/quota-view/update-quota/update-quo
     UpdateUserComponent,
     QuotaListComponent,
     CreateQuotaComponent,
-    UpdateQuotaComponent
-
+    UpdateQuotaComponent,
+    UserDashboardComponent,
   ],
   imports: [
+    BrowserAnimationsModule, // Add BrowserAnimationsModule
     ReactiveFormsModule,
     HttpClientModule,
     BrowserModule,

@@ -49,7 +49,7 @@ public class LeaveRequestController {
         return calculatePlannedDays(startDate, endDate);
     }
     @GetMapping("/pending/{userId}")
-    @PreAuthorize("hasRole('RH')")
+    //@PreAuthorize("hasRole('RH')")
     public ResponseEntity<List<LeaveRequestDTOResponse>> getPendingLeaveRequestsByUserId(@PathVariable Long userId) {
         List<LeaveRequestDTOResponse> leaveRequests = leaveRequestService.getPendingLeaveRequestsByUserId(userId);
         return ResponseEntity.ok(leaveRequests);

@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.leave.backend.Entities.Departement;
+import com.leave.backend.Entities.ERole;
 import com.leave.backend.Entities.LeaveQuota;
 import com.leave.backend.Entities.LeaveRequest;
 import com.leave.backend.Entities.Site;
@@ -21,6 +22,7 @@ import com.leave.backend.Exceptions.LeaveQuotaNotFoundException;
 import com.leave.backend.Exceptions.TeamNotFoundException;
 import com.leave.backend.Exceptions.UserNotFoundException;
 import com.leave.backend.Repositories.DepartementRepository;
+import com.leave.backend.Repositories.RoleRepository;
 import com.leave.backend.Repositories.SiteRepository;
 import com.leave.backend.Repositories.TeamRepository;
 import com.leave.backend.Repositories.UserRepository;
@@ -42,7 +44,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private SiteRepository siteRepository;
 
+@Autowired
+private RoleRepository roleRepository;
 
+@Override
+public List<User> getRHApprovers() {
+    return userRepository.findByRoles_Name(ERole.ROLE_RH);
+}
 
  
         @Override

@@ -24,6 +24,6 @@ public interface UserService {
      List<User> findUsersByIds(List<Long> userIds);
      User findUserById(Long userId) throws UserNotFoundException;
      //List<User> getUsersByLeaveQuota(LeaveQuota leaveQuota) throws LeaveQuotaNotFoundException;
-
+     List<User> getRHApprovers();
      Long getUserIdFromUserDetails(UserDetails userDetails);
 }

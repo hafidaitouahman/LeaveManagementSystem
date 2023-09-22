@@ -57,10 +57,17 @@
 
 // }
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
+import { LeaveRequest } from 'src/app/shared/models/leaverequest.module';
+import { LeaveRequestService } from '../leave-request.service';
+import { LeaveType } from 'src/app/shared/models/leavetype.module';
+import { LeaveTypeService } from '../../leaveType-view/leave-type.service';
+import { UserService } from '../../user-view/user.service';
+import { Router } from '@angular/router';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -112,8 +119,52 @@ export class CalendarFormDialogComponent {
   eventType: string = '';
   eventStart: string = '';
   eventEnd: string = '';
-  constructor(public modal: NgbActiveModal) {}
+  leaveRequestForm: FormGroup;
+  leaveTypes: any[] = [];
+  approvers: any[] = [];
+  replacements: any[] = [];
+  constructor(private fb: FormBuilder,public modal: NgbActiveModal, private leaveRequestService: LeaveRequestService ,
+    private leaveTypeService:LeaveTypeService, private userService:UserService,private router: Router,) {
+    this.leaveRequestForm = this.fb.group({
+      leaveTypeId: [null, Validators.required],
+      approverId: [null, Validators.required],
+      replacementIds: [[]], // Utilisez un tableau vide pour commencer
+      startDate: [null, Validators.required],
+      endDate: [null, Validators.required],
+      comment: ['']
+    });
+  }
 
+  ngOnInit(): void {
+    this.leaveTypeService.getLeaveTypesList().subscribe((data) => {
+      this.leaveTypes = data;
+    });
+
+    this.userService.getApprovers().subscribe((data) => {
+      this.approvers = data;
+    });
+
+    this.userService.getUsersList().subscribe((data) => {
+      this.replacements = data;
+    });
+  }  
+
+  onSubmit() {
+    if (this.leaveRequestForm.valid) {
+      const leaveRequestData = this.leaveRequestForm.value as LeaveRequest;
+      this.leaveRequestService.createLeaveRequest(leaveRequestData).subscribe(
+        (response) => {
+            this.gotoList();
+        },
+        (error) => {
+          // Gérez les erreurs ici, par exemple, affichez un message d'erreur.
+        }
+      );
+    }
+  }
+  gotoList() {
+    this.router.navigate(['/user']);
+  }
   createEvent() {
     // Validate the input and create a new event
     const newEvent: CalendarEvent = {
