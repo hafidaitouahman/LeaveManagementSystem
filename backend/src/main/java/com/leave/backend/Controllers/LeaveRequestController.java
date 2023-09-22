@@ -48,6 +48,16 @@ public class LeaveRequestController {
         // Appelez la méthode de calcul des jours planifiés en utilisant les dates fournies
         return calculatePlannedDays(startDate, endDate);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getLeaveRequestById(@PathVariable Long id) {
+        try {
+            LeaveRequestDTOResponse leaveRequestDTO = leaveRequestService.getLeaveRequestById(id);
+            return ResponseEntity.ok(leaveRequestDTO);
+        } catch (LeaveRequestNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
     @GetMapping("/pending/{userId}")
     //@PreAuthorize("hasRole('RH')")
     public ResponseEntity<List<LeaveRequestDTOResponse>> getPendingLeaveRequestsByUserId(@PathVariable Long userId) {
@@ -119,16 +129,16 @@ public ResponseEntity<List<LeaveRequestDTOResponse>> getPendingLeaveRequests() {
     //     List<LeaveRequestDTOResponse> leaveRequests = leaveRequestService.getAllLeaveRequests();
     //     return ResponseEntity.ok(leaveRequests);
     // }
-    @GetMapping("/all")
-    public List<LeaveRequest> getAllLeaveRequests() {
-        return leaveRequestService.getAllLeaveRequests();
-    }
+    // @GetMapping("/all")
+    // public List<LeaveRequest> getAllLeaveRequests() {
+    //     return leaveRequestService.getAllLeaveRequests();
+    // }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<LeaveRequest> getLeaveRequestById(@PathVariable Long id) throws LeaveRequestNotFoundException {
-        LeaveRequest leaveRequest = leaveRequestService.getLeaveRequestById(id);
-        return ResponseEntity.ok(leaveRequest);
-    }
+    // @GetMapping("/{id}")
+    // public ResponseEntity<LeaveRequest> getLeaveRequestById(@PathVariable Long id) throws LeaveRequestNotFoundException {
+    //     LeaveRequest leaveRequest = leaveRequestService.getLeaveRequestById(id);
+    //     return ResponseEntity.ok(leaveRequest);
+    // }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteLeaveRequest(@PathVariable Long id) {

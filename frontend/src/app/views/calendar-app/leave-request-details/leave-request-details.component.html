@@ -1,0 +1,42 @@
+<div class="leave-request-details">
+    <h2>Détails de la demande de congé</h2>
+    <hr>
+    <div>
+      <strong>ID :</strong> {{ leaveRequest.id }}
+    </div>
+    <div>
+      <strong>Date de début :</strong> {{ leaveRequest.startDate | date }}
+    </div>
+    <div>
+      <strong>Date de fin :</strong> {{ leaveRequest.endDate | date }}
+    </div>
+    <div>
+      <strong>Durée :</strong> {{ leaveRequest.duration }} jours
+    </div>
+   
+    <div>
+      <strong>Approbateur :</strong> {{ leaveRequest.approverUsername }}
+    </div>
+    <div>
+      <strong>Remplaçants :</strong>
+      <ul>
+        <li *ngFor="let replacement of leaveRequest.replacementUsernames">{{ replacement }}</li>
+      </ul>
+    </div>
+    <div>
+      <strong>Type de congé :</strong> {{ leaveRequest.leaveTypeName }}
+    </div>
+    <div>
+      <strong>Commentaire :</strong> {{ leaveRequest.comment }}
+    </div>
+    <div>
+      <strong>Statut :</strong> {{ leaveRequest.status }}
+    </div>
+    <div>
+      <strong>Date de création :</strong> {{ leaveRequest.creDate | date }}
+    </div>
+    <hr>
+    <button class="btn btn-primary">Modifier</button>
+    <button class="btn btn-danger">Supprimer</button>
+  </div>
+  

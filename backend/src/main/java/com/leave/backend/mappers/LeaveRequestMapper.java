@@ -20,6 +20,7 @@ public class LeaveRequestMapper {
 
     public LeaveRequestDTOResponse convertToDTO(LeaveRequest leaveRequest) {
         LeaveRequestDTOResponse responseDTO = new LeaveRequestDTOResponse();
+        responseDTO.setId(leaveRequest.getId());
         responseDTO.setFrom(leaveRequest.getStartDate());
         responseDTO.setTo(leaveRequest.getEndDate());
         responseDTO.setDuration(leaveRequest.getDuration());

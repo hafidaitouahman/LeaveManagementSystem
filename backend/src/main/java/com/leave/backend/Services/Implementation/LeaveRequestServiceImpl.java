@@ -113,6 +113,14 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 //         return leaveRequestRepository.save(leaveRequest);
 //     }
 @Override
+public LeaveRequestDTOResponse getLeaveRequestById(Long leaveRequestId) throws LeaveRequestNotFoundException {
+    LeaveRequest leaveRequest = leaveRequestRepository.findById(leaveRequestId)
+            .orElseThrow(() -> new LeaveRequestNotFoundException("Leave request not found"));
+
+    return leaveRequestMapper.convertToDTO(leaveRequest);
+}
+
+@Override
 public List<LeaveRequestDTOResponse> getPendingLeaveRequestsByUserId(Long userId) {
     List<LeaveRequest> pendingLeaveRequests = leaveRequestRepository.findByUser_IdAndStatus(userId, Status.En_Attente);
     return pendingLeaveRequests.stream()
@@ -361,12 +369,12 @@ private double calculatePlannedDays(LocalDate startDate, LocalDate endDate) {
 // }
 
     
-@Override
+// @Override
 
-    public LeaveRequest getLeaveRequestById(Long leaveRequestId) throws LeaveRequestNotFoundException {
-        return leaveRequestRepository.findById(leaveRequestId)
-                .orElseThrow(() -> new LeaveRequestNotFoundException("Leave request not found"));
-    }
+//     public LeaveRequest getLeaveRequestById(Long leaveRequestId) throws LeaveRequestNotFoundException {
+//         return leaveRequestRepository.findById(leaveRequestId)
+//                 .orElseThrow(() -> new LeaveRequestNotFoundException("Leave request not found"));
+//     }
 @Override
 
     public List<LeaveRequest> getAllLeaveRequests() {

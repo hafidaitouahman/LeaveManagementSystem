@@ -39,8 +39,9 @@
   <div class="leave-requests">
     <h5>Demandes en attente</h5>
     <a>
-      <li *ngFor="let request of leaveRequests" class="leave-request">
-        <div class="leave-request-details">
+      <li *ngFor="let request of leaveRequests" class="leave-request" (click)="openLeaveRequestDetails(request.id)">
+        <div class="leave-request-details" >
+
           <p class="leave-type">{{ request.leaveTypeName }}</p>
           <p class="duration">{{ request.duration }} jours</p>
           <p class="date-range">{{ request.from | date }} - {{ request.to | date }}</p>

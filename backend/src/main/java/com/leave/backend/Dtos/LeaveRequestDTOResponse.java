@@ -9,6 +9,7 @@ import com.leave.backend.Enumeration.Status;
 import lombok.Data;
 @Data
 public class LeaveRequestDTOResponse {
+    private Long id;
     private LocalDate from;
     private LocalDate to;
     private double duration;

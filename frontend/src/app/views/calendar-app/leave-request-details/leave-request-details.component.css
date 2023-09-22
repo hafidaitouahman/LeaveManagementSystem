@@ -1,0 +1,32 @@
+.leave-request-details {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+  }
+  
+  .leave-request-details h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .leave-request-details hr {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .leave-request-details div {
+    margin-bottom: 10px;
+  }
+  
+  .leave-request-details ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 20px;
+  }
+  
+  .leave-request-details button {
+    margin-top: 15px;
+  }
+  

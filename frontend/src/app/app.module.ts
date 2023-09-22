@@ -47,6 +47,7 @@ import { QuotaListComponent } from './views/quota-view/quota-list/quota-list.com
 import { CreateQuotaComponent } from './views/quota-view/create-quota/create-quota.component';
 import { UpdateQuotaComponent } from './views/quota-view/update-quota/update-quota.component';
 import { UserDashboardComponent } from './views/user-dashboard/user-dashboard.component';
+import { LeaveRequestDetailsComponent } from './views/calendar-app/leave-request-details/leave-request-details.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { UserDashboardComponent } from './views/user-dashboard/user-dashboard.co
     CreateQuotaComponent,
     UpdateQuotaComponent,
     UserDashboardComponent,
+    LeaveRequestDetailsComponent,
   ],
   imports: [
     BrowserAnimationsModule, // Add BrowserAnimationsModule

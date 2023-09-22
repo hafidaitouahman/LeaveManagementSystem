@@ -24,7 +24,7 @@ public interface LeaveRequestService {
 //LeaveRequest createLeaveRequest(LeaveRequestCreationDTO requestDTO, Long userId) throws LeaveTypeNotFoundException,UserNotFoundException;
 LeaveRequestDTOResponse createLeaveRequest(LeaveRequestCreationDTO requestDTO, Long userId)
         throws LeaveTypeNotFoundException, UserNotFoundException, InsufficientLeaveQuotaException;
-LeaveRequest getLeaveRequestById(Long leaveRequestId) throws LeaveRequestNotFoundException;
+//LeaveRequest getLeaveRequestById(Long leaveRequestId) throws LeaveRequestNotFoundException;
  //List<LeaveRequest> getAllLeaveRequests();
  void deleteLeaveRequest(Long leaveRequestId);
  //List<LeaveRequestDTOResponse> getAllLeaveRequests();
@@ -35,5 +35,6 @@ LeaveRequest getLeaveRequestById(Long leaveRequestId) throws LeaveRequestNotFoun
  List<LeaveRequestDTOResponse> getPendingLeaveRequests();
  List<LeaveRequestDTOResponse> getLeaveRequestsByUserId(Long userId);
  List<LeaveRequestDTOResponse> getPendingLeaveRequestsByUserId(Long userId);
+ LeaveRequestDTOResponse getLeaveRequestById(Long leaveRequestId) throws LeaveRequestNotFoundException;
 }
 
