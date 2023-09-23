@@ -41,9 +41,10 @@
     <a>
       <li *ngFor="let request of leaveRequests" class="leave-request" (click)="openLeaveRequestDetails(request.id)">
         <div class="leave-request-details" >
-
+          <div class="leave-request-details d-flex justify-content-between">
           <p class="leave-type">{{ request.leaveTypeName }}</p>
           <p class="duration">{{ request.duration }} jours</p>
+          </div>
           <p class="date-range">{{ request.from | date }} - {{ request.to | date }}</p>
         </div>
       </li>

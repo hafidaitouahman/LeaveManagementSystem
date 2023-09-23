@@ -48,6 +48,9 @@ import { CreateQuotaComponent } from './views/quota-view/create-quota/create-quo
 import { UpdateQuotaComponent } from './views/quota-view/update-quota/update-quota.component';
 import { UserDashboardComponent } from './views/user-dashboard/user-dashboard.component';
 import { LeaveRequestDetailsComponent } from './views/calendar-app/leave-request-details/leave-request-details.component';
+import { LeaverequestListComponent } from './views/leaveRequest-view/leaverequest-list/leaverequest-list.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -83,8 +86,11 @@ import { LeaveRequestDetailsComponent } from './views/calendar-app/leave-request
     UpdateQuotaComponent,
     UserDashboardComponent,
     LeaveRequestDetailsComponent,
+    LeaverequestListComponent,
   ],
   imports: [
+    MatIconModule,
+    MatPaginatorModule,
     BrowserAnimationsModule, // Add BrowserAnimationsModule
     ReactiveFormsModule,
     HttpClientModule,

@@ -12,6 +12,7 @@ import com.leave.backend.Dtos.RemplacantDTO;
 import com.leave.backend.Entities.LeaveRequest;
 import com.leave.backend.Exceptions.EmployeNotFoundException;
 import com.leave.backend.Exceptions.InsufficientLeaveQuotaException;
+import com.leave.backend.Exceptions.LeaveRequestAlreadyHandledException;
 import com.leave.backend.Exceptions.LeaveRequestNotFoundException;
 import com.leave.backend.Exceptions.LeaveTypeNotFoundException;
 import com.leave.backend.Exceptions.RemplacantNotAvailableException;
@@ -36,5 +37,8 @@ LeaveRequestDTOResponse createLeaveRequest(LeaveRequestCreationDTO requestDTO, L
  List<LeaveRequestDTOResponse> getLeaveRequestsByUserId(Long userId);
  List<LeaveRequestDTOResponse> getPendingLeaveRequestsByUserId(Long userId);
  LeaveRequestDTOResponse getLeaveRequestById(Long leaveRequestId) throws LeaveRequestNotFoundException;
+ LeaveRequest validateLeaveRequest(Long id) throws LeaveRequestNotFoundException,LeaveRequestAlreadyHandledException;
+ LeaveRequest rejectLeaveRequest(Long id) throws LeaveRequestNotFoundException,LeaveRequestAlreadyHandledException;
+ LeaveRequest cancelLeaveRequest(Long id) throws LeaveRequestNotFoundException,LeaveRequestAlreadyHandledException;
 }
 

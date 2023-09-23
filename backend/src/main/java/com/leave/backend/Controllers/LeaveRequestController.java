@@ -1,6 +1,7 @@
  package com.leave.backend.Controllers;
  import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,6 +27,7 @@ import com.leave.backend.Dtos.LeaveRequestDTOResponse;
 import com.leave.backend.Entities.LeaveRequest;
 import com.leave.backend.Exceptions.EmployeNotFoundException;
 import com.leave.backend.Exceptions.InsufficientLeaveQuotaException;
+import com.leave.backend.Exceptions.LeaveRequestAlreadyHandledException;
 import com.leave.backend.Exceptions.LeaveRequestNotFoundException;
 import com.leave.backend.Exceptions.LeaveTypeNotFoundException;
 import com.leave.backend.Exceptions.RemplacantNotAvailableException;
@@ -48,6 +50,52 @@ public class LeaveRequestController {
         // Appelez la méthode de calcul des jours planifiés en utilisant les dates fournies
         return calculatePlannedDays(startDate, endDate);
     }
+    
+    @PutMapping("/cancel/{id}")
+        @PreAuthorize("hasRole('RH')")
+public ResponseEntity<?> cancelLeaveRequest(@PathVariable Long id) {
+    try {
+        leaveRequestService.cancelLeaveRequest(id);
+        return ResponseEntity.ok(Map.of("message", "Demande de congé annulé avec succès."));
+    } catch (LeaveRequestNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    } catch (LeaveRequestAlreadyHandledException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+
+    @PutMapping("/reject/{id}")
+        @PreAuthorize("hasRole('RH')")
+public ResponseEntity<?> rejectLeaveRequest(@PathVariable Long id) {
+    try {
+        leaveRequestService.rejectLeaveRequest(id);
+        return ResponseEntity.ok(Map.of("message", "Demande de congé rejeté avec succès."));
+    } catch (LeaveRequestNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    } catch (LeaveRequestAlreadyHandledException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+
+    @PutMapping("/validate/{id}")
+        @PreAuthorize("hasRole('RH')")
+public ResponseEntity<?> validateLeaveRequest(@PathVariable Long id) {
+    try {
+        leaveRequestService.validateLeaveRequest(id);
+        return ResponseEntity.ok(Map.of("message", "Demande de congé validée avec succès."));
+    } catch (LeaveRequestNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    } catch (LeaveRequestAlreadyHandledException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getLeaveRequestById(@PathVariable Long id) {
         try {

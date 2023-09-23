@@ -66,10 +66,10 @@ export class LoginComponent implements OnInit {
         this.roles = this.storageService.getUser().roles;
         //
         if(this.storageService.getUser().roles=='ROLE_USER'){
-          this.router.navigateByUrl("/calendar");
+          this.router.navigateByUrl("/user");
         }else{
           
-          this.router.navigateByUrl("/rh");}
+          this.router.navigateByUrl("/rh/leaverequest");}
       this.reloadPage();
       },
       error: err => {

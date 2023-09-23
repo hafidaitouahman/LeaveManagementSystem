@@ -30,6 +30,7 @@ import com.leave.backend.Entities.UserQuota;
 import com.leave.backend.Enumeration.Status;
 import com.leave.backend.Exceptions.EmployeNotFoundException;
 import com.leave.backend.Exceptions.InsufficientLeaveQuotaException;
+import com.leave.backend.Exceptions.LeaveRequestAlreadyHandledException;
 import com.leave.backend.Exceptions.LeaveRequestNotFoundException;
 import com.leave.backend.Exceptions.LeaveTypeNotFoundException;
 import com.leave.backend.Exceptions.RemplacantNotAvailableException;
@@ -112,6 +113,51 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
 //         return leaveRequestRepository.save(leaveRequest);
 //     }
+@Override
+public LeaveRequest cancelLeaveRequest(Long id) throws LeaveRequestNotFoundException,LeaveRequestAlreadyHandledException{
+    // Ajoutez ici la logique pour valider la demande de congé avec l'ID donné
+    // Assurez-vous de vérifier si la demande peut être validée en fonction de son statut actuel
+    // (par exemple, si elle est en attente) et mettez à jour son statut en "Validé"
+    LeaveRequest leaveRequest = leaveRequestRepository.findById(id)   
+    .orElseThrow(() -> new LeaveRequestNotFoundException("Leave request not found"));
+    if (leaveRequest.getStatus() == Status.En_Attente) {
+        leaveRequest.setStatus(Status.Annulé);
+        return leaveRequestRepository.save(leaveRequest);
+    } else {
+        throw new LeaveRequestAlreadyHandledException("Cette demande de congé a déjà été traitée.");
+    }
+}
+
+@Override
+public LeaveRequest validateLeaveRequest(Long id) throws LeaveRequestNotFoundException,LeaveRequestAlreadyHandledException{
+    // Ajoutez ici la logique pour valider la demande de congé avec l'ID donné
+    // Assurez-vous de vérifier si la demande peut être validée en fonction de son statut actuel
+    // (par exemple, si elle est en attente) et mettez à jour son statut en "Validé"
+    LeaveRequest leaveRequest = leaveRequestRepository.findById(id)   
+    .orElseThrow(() -> new LeaveRequestNotFoundException("Leave request not found"));
+    if (leaveRequest.getStatus() == Status.En_Attente) {
+        leaveRequest.setStatus(Status.Validé);
+        return leaveRequestRepository.save(leaveRequest);
+    } else {
+        throw new LeaveRequestAlreadyHandledException("Cette demande de congé a déjà été traitée.");
+    }
+}
+
+@Override
+public LeaveRequest rejectLeaveRequest(Long id) throws LeaveRequestNotFoundException,LeaveRequestAlreadyHandledException{
+    // Ajoutez ici la logique pour valider la demande de congé avec l'ID donné
+    // Assurez-vous de vérifier si la demande peut être validée en fonction de son statut actuel
+    // (par exemple, si elle est en attente) et mettez à jour son statut en "Validé"
+    LeaveRequest leaveRequest = leaveRequestRepository.findById(id)   
+    .orElseThrow(() -> new LeaveRequestNotFoundException("Leave request not found"));
+    if (leaveRequest.getStatus() == Status.En_Attente) {
+        leaveRequest.setStatus(Status.Refusé);
+        return leaveRequestRepository.save(leaveRequest);
+    } else {
+        throw new LeaveRequestAlreadyHandledException("Cette demande de congé a déjà été traitée.");
+    }
+}
+
 @Override
 public LeaveRequestDTOResponse getLeaveRequestById(Long leaveRequestId) throws LeaveRequestNotFoundException {
     LeaveRequest leaveRequest = leaveRequestRepository.findById(leaveRequestId)

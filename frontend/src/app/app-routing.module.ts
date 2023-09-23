@@ -19,6 +19,7 @@ import { UserDetailsComponent } from './views/user-view/user-details/user-detail
 import { UpdateUserComponent } from './views/user-view/update-user/update-user.component';
 import { QuotaListComponent } from './views/quota-view/quota-list/quota-list.component';
 import { UserDashboardComponent } from './views/user-dashboard/user-dashboard.component';
+import { LeaverequestListComponent } from './views/leaveRequest-view/leaverequest-list/leaverequest-list.component';
 const routes: Routes = [
   //{ path: '', redirectTo: 'login', pathMatch: 'full' },
   
@@ -33,6 +34,8 @@ const routes: Routes = [
   { path: 'register', component: RegistrationComponent },
   {path:"rh",component:RhDashboardComponent , canActivate : [AuthenticationGuard],
   children : [
+    { path: 'leaverequest', component: LeaverequestListComponent, canActivate : [AuthorizationGuard], data : {role : "ROLE_RH"} },
+
   { path: 'departement', component: DepartementListComponent, canActivate : [AuthorizationGuard], data : {role : "ROLE_RH"} },
   {path:'team', component:TeamListComponent ,canActivate : [AuthorizationGuard], data : {role : "ROLE_RH"}},
   {path:'site', component:SiteListComponent,canActivate : [AuthorizationGuard], data : {role : "ROLE_RH"}},

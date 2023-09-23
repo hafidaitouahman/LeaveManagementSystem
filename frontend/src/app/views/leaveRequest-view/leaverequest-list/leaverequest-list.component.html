@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <div class="card">
+        <div class="card-header">
+          Demandes de congés
+        </div>
+        <div class="card-body">
+          <ul class="leave-request-list">
+            <li *ngFor="let request of pagedPendingLeaveRequests" class="leave-request">
+              <div class="leave-request-details">
+                <div class="leave-request-details d-flex justify-content-between"> 
+                  <p class="user">{{ request.requesterUsername }}</p>
+                  <p class="date-range">{{ request.from | date }} - {{ request.to | date }}</p>
+                  <div>
+                    <!-- Icône de validation -->
+
+                    <mat-icon class="icon" (click)="validateLeaveRequest(request.id)">check</mat-icon>
+                    <!-- Icône de refus -->
+                    <mat-icon class="icon" (click)="rejectLeaveRequest(request.id)">cancel</mat-icon>
+                    <!-- Icône d'annulation -->
+                    <mat-icon class="icon" (click)="cancelLeaveRequest(request.id)">delete</mat-icon>
+                  </div>
+                </div>
+                <p>{{ request.approverUsername }} - {{ request.leaveTypeName }} - {{ request.duration }} jours</p>
+              </div>
+            </li>
+          </ul>
+          
+          
+          <!-- MatPaginator -->
+          <mat-paginator
+            [length]="totalItems" 
+            [pageSize]="itemsPerPage"
+            [pageSizeOptions]="[2, 3, 4]"
+            (page)="onPageChange($event)"
+          ></mat-paginator>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-9">
+      <div class="card">
+        <div class="card-header">
+          Absences du jour
+        </div>
+        <div class="card-body">
+          <!-- Liste des absences du jour ici -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

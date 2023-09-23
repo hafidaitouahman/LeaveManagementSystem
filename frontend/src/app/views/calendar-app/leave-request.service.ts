@@ -27,4 +27,20 @@ export class LeaveRequestService {
     const url = `${this.baseUrl}/${leaveRequestId}`;
     return this.http.get<leaveRequestDetails>(url);
   }
+
+  getPendingLeaveRequests(): Observable<pendingLeaveRequests[]> {
+    return this.http.get<pendingLeaveRequests[]>(`${this.baseUrl}/pending`);
+  }
+
+  validateLeaveRequest(requestId: number): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/validate/${requestId}`, {});
+  }
+
+  rejectLeaveRequest(requestId: number): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/reject/${requestId}`, {});
+  }
+
+  cancelLeaveRequest(requestId: number): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/cancel/${requestId}`, {});
+  }
 }
