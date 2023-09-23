@@ -36,4 +36,65 @@
   .leave-request .date-range {
     color: #DC3545; /* Couleur pour les dates de début et de fin */
   }
+  .leave-request-details-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 5px;
+  
+    .leave-request-info {
+      flex: 1;
+    }
+  
+    .leave-request-actions {
+      display: flex;
+      gap: 10px;
+  
+      .icon {
+        cursor: pointer;
+      }
+    }
+  }
+  .leave-request-actions .icon {
+    cursor: pointer;
+    transition: color 0.3s; // Ajout de transition pour l'effet de survol
+  
+    &.validate {
+      color: #4CAF50; // Couleur verte pour valider
+    }
+  
+    &.reject {
+      color: #FF5722; // Couleur rouge pour rejeter
+    }
+  
+    &.cancel {
+      color: #F44336; // Couleur rouge pour annuler
+    }
+  
+    &:hover {
+      color: #333; // Couleur de survol pour tous les icônes
+    }
+  }
+  
+  .leave-request-actions .icon::after {
+    content: "";
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  
+  .leave-request-actions .icon:hover::after {
+    content: attr(data-tooltip);
+    opacity: 1;
+  }
+  
+
   

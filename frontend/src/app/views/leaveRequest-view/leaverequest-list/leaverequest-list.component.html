@@ -9,24 +9,23 @@
           <ul class="leave-request-list">
             <li *ngFor="let request of pagedPendingLeaveRequests" class="leave-request">
               <div class="leave-request-details">
-                <div class="leave-request-details d-flex justify-content-between"> 
-                  <p class="user">{{ request.requesterUsername }}</p>
-                  <p class="date-range">{{ request.from | date }} - {{ request.to | date }}</p>
-                  <div>
+                <div class="leave-request-details-container">
+                  <div class="leave-request-info">
+                    <p class="user">{{ request.requesterUsername }}</p>
+                    <p class="date-range">{{ request.from | date }} - {{ request.to | date }}</p>
+                    <p>{{ request.approverUsername }} - {{ request.leaveTypeName }} - {{ request.duration }} jours</p>
+                  </div>
+                  <div class="leave-request-actions">
                     <!-- Icône de validation -->
-
-                    <mat-icon class="icon" (click)="validateLeaveRequest(request.id)">check</mat-icon>
-                    <!-- Icône de refus -->
-                    <mat-icon class="icon" (click)="rejectLeaveRequest(request.id)">cancel</mat-icon>
-                    <!-- Icône d'annulation -->
-                    <mat-icon class="icon" (click)="cancelLeaveRequest(request.id)">delete</mat-icon>
+                    <mat-icon class="icon validate" (click)="validateLeaveRequest(request.id)" data-tooltip="VALIDER">check</mat-icon>
+                    <mat-icon class="icon reject" (click)="rejectLeaveRequest(request.id)" data-tooltip="REJETER">cancel</mat-icon>
+                    <mat-icon class="icon cancel" (click)="cancelLeaveRequest(request.id)" data-tooltip="ANNULER">delete</mat-icon>
+                    
                   </div>
                 </div>
-                <p>{{ request.approverUsername }} - {{ request.leaveTypeName }} - {{ request.duration }} jours</p>
               </div>
             </li>
           </ul>
-          
           
           <!-- MatPaginator -->
           <mat-paginator

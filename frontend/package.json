@@ -28,6 +28,7 @@
     "bootstrap-jquery": "^3.3.2",
     "calendar-utils": "^0.10.4",
     "date-fns": "^2.30.0",
+    "material-icons": "^1.13.11",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from './shared/shared.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CalendarAppComponent } from './views/calendar-app/calendar-app.component';
 import { SidenavBarComponent } from './views/sidenav-bar/sidenav-bar.component'
 import { FormsModule } from '@angular/forms';
@@ -99,7 +99,6 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule,
     MatSlideToggleModule,
     SharedModule,
-    FontAwesomeModule,
     SharedMaterialModule,
     FormsModule,
     NgbModalModule,
