@@ -1,33 +1,93 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+<!-- <div class="modal-header">
+  <h4 class="modal-title">Modifier un Utilisateur</h4>
+  <button type="button" class="close" aria-label="Fermer" (click)="modal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="updateUserForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="username">Nom d'utilisateur</label>
-      <input type="text" id="username" formControlName="username" class="form-control">
+      <input formControlName="username" type="text" id="username" class="form-control" required>
     </div>
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="text" id="email" formControlName="email" class="form-control">
+      <input formControlName="email" type="email" id="email" class="form-control" required>
     </div>
-    <!-- Autres champs de l'utilisateur -->
-  
+    <div class="form-group">
+      <label for="pays">Pays</label>
+      <input formControlName="pays" type="text" id="pays" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="departementId">Département</label>
+      <select formControlName="departementId" id="departementId" class="form-control" required>
+        <option value="" disabled>Choisissez un département</option>
+        <option *ngFor="let departement of departements" [value]="departement.id">{{ departement.name }}</option>
+      </select>
+    </div>
     <div class="form-group">
       <label for="teamId">Équipe</label>
-      <select id="teamId" formControlName="teamId" class="form-control">
+      <select formControlName="teamId" id="teamId" class="form-control" required>
+        <option value="" disabled>Choisissez une équipe</option>
         <option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</option>
       </select>
     </div>
     <div class="form-group">
       <label for="siteId">Site</label>
-      <select id="siteId" formControlName="siteId" class="form-control">
+      <select formControlName="siteId" id="siteId" class="form-control" required>
+        <option value="" disabled>Choisissez un site</option>
         <option *ngFor="let site of sites" [value]="site.id">{{ site.name }}</option>
       </select>
     </div>
-    <div class="form-group">
-      <label for="departmentId">Département</label>
-      <select id="departmentId" formControlName="departmentId" class="form-control">
-        <option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</option>
-      </select>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Annuler</button>
+      <button type="submit" class="btn btn-primary">Modifier</button>
     </div>
-  
-    <button type="submit" class="btn btn-primary">Mettre à jour</button>
   </form>
-  
+</div> -->
+<h2>Modifier l'utilisateur</h2>
+<form [formGroup]="updateUserForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="username">Nom d'utilisateur</label>
+    <input type="text" id="username" formControlName="username" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="email">Adresse e-mail</label>
+    <input type="email" id="email" formControlName="email" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="hirDate">Date d'embauche</label>
+    <input type="date" id="hirDate" formControlName="hirDate" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="departementId">Département</label>
+    <select id="departementId" formControlName="departementId" class="form-control">
+      <!-- Utilisez *ngFor pour générer les options à partir des données disponibles -->
+      <option *ngFor="let departement of departements" [value]="departement.id">{{ departement.name }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="teamId">Équipe</label>
+    <select id="teamId" formControlName="teamId" class="form-control">
+      <!-- Utilisez *ngFor pour générer les options à partir des données disponibles -->
+      <option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="siteId">Site</label>
+    <select id="siteId" formControlName="siteId" class="form-control">
+      <!-- Utilisez *ngFor pour générer les options à partir des données disponibles -->
+      <option *ngFor="let site of sites" [value]="site.id">{{ site.name }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="quota">Quota</label>
+    <input type="number" id="quota" formControlName="quota" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="residuel">Résiduel</label>
+    <input type="number" id="residuel" formControlName="residuel" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-primary">Mettre à jour</button>
+</form>
+

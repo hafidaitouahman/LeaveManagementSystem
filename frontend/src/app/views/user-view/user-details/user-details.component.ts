@@ -18,7 +18,7 @@ export class UserDetailsComponent implements OnInit {
       this.userId = +params['id'];
 
       // Utilisez l'ID pour obtenir les détails de l'utilisateur
-      this.userService.getUser(this.userId).subscribe(user => {
+      this.userService.getUserById(this.userId).subscribe(user => {
         this.user = user;
       });
     });

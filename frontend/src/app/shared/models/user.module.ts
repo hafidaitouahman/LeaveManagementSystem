@@ -1,6 +1,3 @@
-import { Departement } from "./departement.module";
-import { Site } from "./site.module";
-import { Team } from "./team.module";
 
 export class User {
     id!: number;
@@ -8,8 +5,11 @@ export class User {
     email!: string;
     password!: string;
     hirDate!: Date;
-    team!: Team; // Replace with the appropriate type for Team
-    department!: Departement; 
-    site!: Site;// Replace with the appropriate type for Department
-    // Add other properties as needed
+    teamId!: number;
+    departementId!: number; 
+    siteId!: number;
+    role!:string[];
+    quota!:number;
+    residuel!:number;
+   
   }

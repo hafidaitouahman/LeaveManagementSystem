@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/user.module'; // Import your User model
+import { UserDetails } from 'src/app/shared/models/userDetails.module';
+import { UpdateUserForm } from 'src/app/shared/models/UpdateUserForm.module';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +14,12 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`);
+  getUserById(userId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${userId}`);
   }
 
-  getUsersList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/all`);
+  getUsersList(): Observable<UserDetails[]> {
+    return this.http.get<UserDetails[]>(`${this.baseUrl}/all`);
   }
   getApprovers(): Observable<any> {
     return this.http.get(`${this.baseUrl}/rh`);
@@ -30,7 +32,13 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/add`, user);
   }
 
-  updateUser(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/${id}`, value);
+  // updateUser(userId: number, updateUserRequest: any): Observable<any> {
+  //   const url = `${this.baseUrl}/${userId}`;
+  //   return this.http.put(url, updateUserRequest);
+  // }
+  updateUser(userId: number, updateUserForm: UpdateUserForm): Observable<any> {
+    // Effectuez une requête HTTP PUT pour mettre à jour l'utilisateur
+    // Utilisez l'URL appropriée pour mettre à jour un utilisateur spécifique
+    return this.http.put<any>(`${this.baseUrl}/${userId}`, updateUserForm);
   }
 }

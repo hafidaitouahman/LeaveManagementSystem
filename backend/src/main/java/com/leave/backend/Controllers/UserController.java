@@ -23,13 +23,17 @@ import com.leave.backend.Entities.Role;
 import com.leave.backend.Entities.Site;
 import com.leave.backend.Entities.Team;
 import com.leave.backend.Entities.User;
+import com.leave.backend.Entities.UserQuota;
 import com.leave.backend.Exceptions.SiteNotFoundException;
 import com.leave.backend.Repositories.DepartementRepository;
+import com.leave.backend.Repositories.LeaveRequestRepository;
 import com.leave.backend.Repositories.RoleRepository;
 import com.leave.backend.Repositories.SiteRepository;
 import com.leave.backend.Repositories.TeamRepository;
+import com.leave.backend.Repositories.UserQuotaRepository;
 import com.leave.backend.Repositories.UserRepository;
 import com.leave.backend.Security.jwt.JwtUtils;
+import com.leave.backend.Services.LeaveQuotaService;
 import com.leave.backend.Services.SiteService;
 import com.leave.backend.Services.UserService;
 import com.leave.backend.mappers.UserMapper;
@@ -48,6 +52,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200" , maxAge = 3600, allowCredentials="true")
@@ -81,8 +86,44 @@ public class UserController {
   PasswordEncoder encoder;
 
   @Autowired
-  JwtUtils jwtUtils;
+UserQuotaRepository userQuotaRepository;
 
+  @Autowired
+LeaveQuotaService leaveQuotaService;
+
+@Autowired
+LeaveRequestRepository leaveRequestRepository;
+  @Autowired
+  JwtUtils jwtUtils;
+  @DeleteMapping("/{userId}")
+  public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
+      // Recherchez l'utilisateur par son ID dans la base de données
+      Optional<User> userOptional = userRepository.findById(userId);
+  
+      if (!userOptional.isPresent()) {
+          return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse("Utilisateur non trouvé avec l'ID : " + userId));
+      }
+  
+      User user = userOptional.get();
+  
+      // Supprimez l'utilisateur de toutes les relations et de la base de données
+      // Par exemple, vous pouvez supprimer les quotas de congé associés, les références dans d'autres entités, etc.
+      List<UserQuota> userQuotas = userQuotaRepository.findByUser(user);
+
+for (UserQuota userQuota : userQuotas) {
+    userQuotaRepository.delete(userQuota);
+}
+List<LeaveRequest> leaveRequests = leaveRequestRepository.findByUser(user);
+
+for (LeaveRequest leaveRequest : leaveRequests) {
+    leaveRequestRepository.delete(leaveRequest);
+}
+      // Assurez-vous de mettre en œuvre la logique de suppression appropriée pour votre application.
+  
+      userRepository.delete(user);
+  
+      return ResponseEntity.ok(new MessageResponse("Utilisateur supprimé avec succès."));
+  }
   @GetMapping("/rh")
   public ResponseEntity<List<User>> getRHApprovers() {
       List<User> rhApprovers = userService.getRHApprovers();
@@ -91,53 +132,100 @@ public class UserController {
     @PostMapping("/add")
 public ResponseEntity<?> addUserByRH(@Valid @RequestBody AddUserRequest addUserRequest) {
     // Vérifiez si l'utilisateur actuel a le rôle "RH"
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    boolean isRH = authentication.getAuthorities().stream()
-            .anyMatch(role -> role.getAuthority().equals("ROLE_RH"));
+   // Vérifiez si l'utilisateur actuel a le rôle "RH"
+   Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+   boolean isRH = authentication.getAuthorities().stream()
+           .anyMatch(role -> role.getAuthority().equals("ROLE_RH"));
 
-    if (!isRH) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new MessageResponse("Vous n'avez pas l'autorisation d'ajouter un utilisateur."));
-    }
+   if (!isRH) {
+       return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new MessageResponse("Vous n'avez pas l'autorisation d'ajouter un utilisateur."));
+   }
 
-    if (userRepository.existsByUsername(addUserRequest.getUsername())) {
-        return ResponseEntity.badRequest().body(new MessageResponse("Erreur : le nom d'utilisateur est déjà pris !"));
-    }
+   if (userRepository.existsByUsername(addUserRequest.getUsername())) {
+       return ResponseEntity.badRequest().body(new MessageResponse("Erreur : le nom d'utilisateur est déjà pris !"));
+   }
 
-    if (userRepository.existsByEmail(addUserRequest.getEmail())) {
-        return ResponseEntity.badRequest().body(new MessageResponse("Erreur : l'adresse e-mail est déjà utilisée !"));
-    }
+   if (userRepository.existsByEmail(addUserRequest.getEmail())) {
+       return ResponseEntity.badRequest().body(new MessageResponse("Erreur : l'adresse e-mail est déjà utilisée !"));
+   }
 
-    // Créez un nouvel utilisateur avec le nom d'utilisateur, l'e-mail et le mot de passe fournis
-    User user = new User(addUserRequest.getUsername(),
-                         addUserRequest.getEmail(),
-                         encoder.encode(addUserRequest.getPassword()),
-                         addUserRequest.getPays(),
-                         addUserRequest.getHirDate());
-    user.setActive(true);
+   // Créez un nouvel utilisateur avec le nom d'utilisateur, l'e-mail et le mot de passe fournis
+   User user = new User(addUserRequest.getUsername(),
+                        addUserRequest.getEmail(),
+                        encoder.encode(addUserRequest.getPassword()),
+                        addUserRequest.getPays(),
+                        addUserRequest.getHirDate());
+   user.setActive(true);
 
-    // Récupérez le département, l'équipe et le site à partir des IDs fournis
-    Departement departement = departementRepository.findById(addUserRequest.getDepartementId())
-            .orElseThrow(() -> new RuntimeException("Erreur : le département n'a pas été trouvé."));
+   // Récupérez le département, l'équipe et le site à partir des IDs fournis
+   Departement departement = departementRepository.findById(addUserRequest.getDepartementId())
+           .orElseThrow(() -> new RuntimeException("Erreur : le département n'a pas été trouvé."));
 
-    Team team = teamRepository.findById(addUserRequest.getTeamId())
-            .orElseThrow(() -> new RuntimeException("Erreur : l'équipe n'a pas été trouvée."));
+   Team team = teamRepository.findById(addUserRequest.getTeamId())
+           .orElseThrow(() -> new RuntimeException("Erreur : l'équipe n'a pas été trouvée."));
 
-    Site site = siteRepository.findById(addUserRequest.getSiteId())
-            .orElseThrow(() -> new RuntimeException("Erreur : le site n'a pas été trouvé."));
+   Site site = siteRepository.findById(addUserRequest.getSiteId())
+           .orElseThrow(() -> new RuntimeException("Erreur : le site n'a pas été trouvé."));
 
-    // Associez le département, l'équipe et le site à l'utilisateur
-    user.setDepartement(departement);
-    user.setTeam(team);
-    user.setSite(site);
+   // Associez le département, l'équipe et le site à l'utilisateur
+   user.setDepartement(departement);
+   user.setTeam(team);
+   user.setSite(site);
 
-    Set<Role> roles = new HashSet<>();
-    Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-          .orElseThrow(() -> new RuntimeException("Erreur : le rôle n'a pas été trouvé."));
-    roles.add(userRole);
-    user.setRoles(roles);
+   // Utilisez le code que vous avez fourni pour déterminer les rôles de l'utilisateur
+   Set<String> strRoles = addUserRequest.getRole();
+   Set<Role> roles = new HashSet<>();
 
-    userRepository.save(user);
+   if (strRoles == null) {
+       Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+           .orElseThrow(() -> new RuntimeException("Erreur : le rôle n'a pas été trouvé."));
+       roles.add(userRole);
+   } else {
+       strRoles.forEach(role -> {
+           switch (role) {
+               case "rh":
+                   Role adminRole = roleRepository.findByName(ERole.ROLE_RH)
+                       .orElseThrow(() -> new RuntimeException("Erreur : le rôle n'a pas été trouvé."));
+                   roles.add(adminRole);
+                   break;
+                case "user":
+                Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                       .orElseThrow(() -> new RuntimeException("Erreur : le rôle n'a pas été trouvé."));
+                   roles.add(userRole);
+                 break;
 
+               default:
+                   Role defaultuserRole = roleRepository.findByName(ERole.ROLE_USER)
+                       .orElseThrow(() -> new RuntimeException("Erreur : le rôle n'a pas été trouvé."));
+                   roles.add(defaultuserRole);
+           }
+       });
+   }
+
+   user.setRoles(roles);
+
+   userRepository.save(user);
+ LeaveQuota leaveQuota = leaveQuotaService.getLeaveQuotaByPays(addUserRequest.getPays());
+
+    // Associez le quota de congé à l'utilisateur pour l'année en cours
+    int currentYear = LocalDate.now().getYear();
+    UserQuota userQuota = new UserQuota();
+    userQuota.setUser(user);
+    userQuota.setLeaveQuota(leaveQuota);
+    userQuota.setYear(currentYear);
+
+//test 
+    Double quota = addUserRequest.getQuota();
+    Double residuel = addUserRequest.getResiduel();
+   if(quota!=null&&residuel!=null){
+    // Set the quota and residuel
+    userQuota.setQuota(quota);
+    userQuota.setResiduel(residuel);}
+else{
+    userQuota.setQuota(leaveQuota.getQuota()); // Utilisez le quota du pays
+    userQuota.setResiduel(leaveQuota.getQuota()); // Utilisez le quota du pays
+}
+    userQuotaRepository.save(userQuota);
    //return ResponseEntity.ok(new MessageResponse("Utilisateur ajouté avec succès !"));
    
 // Récupérez les informations détaillées de l'utilisateur
@@ -239,11 +327,11 @@ public ResponseEntity<List<UserDetailsResponse>> getAllUsers() {
     //             return ResponseEntity.notFound().build();
     //         }
     //     }
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<String> deleteUser(@PathVariable Long userId) {
-        userService.deleteUser(userId);
-        return ResponseEntity.ok("User deleted successfully");
-    }
+    // @DeleteMapping("/{userId}")
+    // public ResponseEntity<String> deleteUser(@PathVariable Long userId) {
+    //     userService.deleteUser(userId);
+    //     return ResponseEntity.ok("User deleted successfully");
+    // }
     // @PutMapping("/{userId}")
     // @PreAuthorize("hasRole('RH')")
     // public ResponseEntity<User> updateUserProfile(
@@ -277,28 +365,77 @@ public ResponseEntity<List<UserDetailsResponse>> getAllUsers() {
 //     }
 // }
 @PutMapping("/{userId}")
-public ResponseEntity<User> updateUserProfile(
-        @PathVariable Long userId,
-        @RequestBody Map<String, Object> requestParams) {
-    try {
-        int departementId = (int) requestParams.get("departementId");
-        int teamId = (int) requestParams.get("teamId");
-        int siteId = (int) requestParams.get("siteId");
-        
-        String hireDateStr = String.valueOf(requestParams.get("hireDate"));
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date hireDate = dateFormat.parse(hireDateStr);
+public ResponseEntity<?> updateUser(@PathVariable Long userId, @Valid @RequestBody AddUserRequest updateUserRequest) {
+    // Recherchez l'utilisateur par son ID dans la base de données
+    Optional<User> userOptional = userRepository.findById(userId);
 
-        User updatedUser = userService.updateUserProfile(userId, departementId, teamId, siteId, hireDate);
-        return ResponseEntity.ok(updatedUser);
-    } catch (EntityNotFoundException e) {
-        // Handle the case where the user is not found
-        return ResponseEntity.notFound().build();
-    } catch (Exception e) {
-        // Handle errors, including date format errors
-        return ResponseEntity.badRequest().build();
+    if (!userOptional.isPresent()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse("Utilisateur non trouvé avec l'ID : " + userId));
     }
+
+    User user = userOptional.get();
+
+    // Assurez-vous que l'utilisateur est actif
+    user.setActive(true);
+
+    // Mettez à jour les champs de l'utilisateur en fonction de la requête
+    user.setUsername(updateUserRequest.getUsername());
+    user.setEmail(updateUserRequest.getEmail());
+    user.setPays(updateUserRequest.getPays());
+    user.setHirDate(updateUserRequest.getHirDate());
+
+    // Récupérez le département, l'équipe et le site à partir des IDs fournis
+    Departement departement = departementRepository.findById(updateUserRequest.getDepartementId())
+           .orElseThrow(() -> new RuntimeException("Erreur : le département n'a pas été trouvé."));
+
+    Team team = teamRepository.findById(updateUserRequest.getTeamId())
+           .orElseThrow(() -> new RuntimeException("Erreur : l'équipe n'a pas été trouvée."));
+
+    Site site = siteRepository.findById(updateUserRequest.getSiteId())
+           .orElseThrow(() -> new RuntimeException("Erreur : le site n'a pas été trouvé."));
+
+    // Associez le département, l'équipe et le site à l'utilisateur
+    user.setDepartement(departement);
+    user.setTeam(team);
+    user.setSite(site);
+
+    // Utilisez le code que vous avez fourni pour déterminer les rôles de l'utilisateur
+    Set<String> strRoles = updateUserRequest.getRole();
+    Set<Role> roles = new HashSet<>();
+
+    if (strRoles == null) {
+        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+            .orElseThrow(() -> new RuntimeException("Erreur : le rôle n'a pas été trouvé."));
+        roles.add(userRole);
+    } else {
+        strRoles.forEach(role -> {
+            switch (role) {
+                case "rh":
+                    Role adminRole = roleRepository.findByName(ERole.ROLE_RH)
+                        .orElseThrow(() -> new RuntimeException("Erreur : le rôle n'a pas été trouvé."));
+                    roles.add(adminRole);
+                    break;
+                case "user":
+                    Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                        .orElseThrow(() -> new RuntimeException("Erreur : le rôle n'a pas été trouvé."));
+                    roles.add(userRole);
+                    break;
+                default:
+                    Role defaultuserRole = roleRepository.findByName(ERole.ROLE_USER)
+                        .orElseThrow(() -> new RuntimeException("Erreur : le rôle n'a pas été trouvé."));
+                    roles.add(defaultuserRole);
+            }
+        });
+    }
+
+    user.setRoles(roles);
+
+    userRepository.save(user);
+
+    // Renvoyez une réponse de succès ou toute autre information nécessaire
+    return ResponseEntity.ok(new MessageResponse("Utilisateur mis à jour avec succès !"));
 }
+
 
 
     @PutMapping("/{userId}/deactivate")

@@ -1,0 +1,73 @@
+<div class="modal-header">
+    <h4 class="modal-title">Ajouter un Utilisateur</h4>
+    <button type="button" class="close" aria-label="Fermer" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Nom d'utilisateur</label>
+        <input formControlName="username" type="text" id="username" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input formControlName="email" type="email" id="email" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input formControlName="password" type="password" id="password" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="pays">Pays</label>
+        <input formControlName="pays" type="text" id="pays" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="departementId">Département</label>
+        <select formControlName="departementId" id="departementId" class="form-control" required>
+          <option value="" disabled>Choisissez un département</option>
+          <option *ngFor="let departement of departements" [value]="departement.id">{{ departement.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="teamId">Équipe</label>
+        <select formControlName="teamId" id="teamId" class="form-control" required>
+          <option value="" disabled>Choisissez une équipe</option>
+          <option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="siteId">Site</label>
+        <select formControlName="siteId" id="siteId" class="form-control" required>
+          <option value="" disabled>Choisissez un site</option>
+          <option *ngFor="let site of sites" [value]="site.id">{{ site.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="hirDate">Date d'embauche</label>
+        <input formControlName="hirDate" type="date" id="hirDate" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="role">Rôle</label>
+        <select formControlName="role" id="role" class="form-control" multiple>
+          <option value="rh">RH</option>
+          <option value="user">Utilisateur</option>
+          <!-- Ajoutez d'autres rôles au besoin -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="quota">Quota</label>
+        <input formControlName="quota" type="number" id="quota" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="residuel">Residuel</label>
+        <input formControlName="residuel" type="number" id="residuel" class="form-control" required>
+      </div>
+      <!-- Ajoutez les champs de quota et de résiduel ici, similaire aux autres champs -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Annuler</button>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+      </div>
+    </form>
+  </div>
+  

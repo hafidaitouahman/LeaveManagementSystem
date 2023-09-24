@@ -15,5 +15,7 @@ public interface UserQuotaRepository extends JpaRepository<UserQuota, UserQuota.
     List<UserQuota> findByLeaveQuota(LeaveQuota leaveQuota);
     void deleteByLeaveQuota(LeaveQuota leaveQuota);
     UserQuota findByUserIdAndYear(Long userId, int year);
+    List<UserQuota> findByUser(User user);
+
 
 }

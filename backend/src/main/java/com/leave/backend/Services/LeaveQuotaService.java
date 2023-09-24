@@ -11,6 +11,7 @@ import com.leave.backend.Repositories.LeaveQuotaRepository;
 
 
 public interface LeaveQuotaService {
+    LeaveQuota getLeaveQuotaByPays(String pays);
     LeaveQuota createLeaveQuota(String name, double quota, String pays);
     // LeaveQuota createLeaveQuota(String name, double quota);
     LeaveQuota updateLeaveQuota(Long quotaId, LeaveQuotaDTO request);

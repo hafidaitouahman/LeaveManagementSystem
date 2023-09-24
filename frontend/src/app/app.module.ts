@@ -51,6 +51,7 @@ import { LeaveRequestDetailsComponent } from './views/calendar-app/leave-request
 import { LeaverequestListComponent } from './views/leaveRequest-view/leaverequest-list/leaverequest-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
+import { CreateUserComponent } from './views/user-view/create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { MatIconModule } from '@angular/material/icon';
     UserDashboardComponent,
     LeaveRequestDetailsComponent,
     LeaverequestListComponent,
+    CreateUserComponent,
   ],
   imports: [
     MatIconModule,

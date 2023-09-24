@@ -8,6 +8,7 @@ import com.leave.backend.Entities.LeaveQuota;
 import com.leave.backend.Entities.User;
 import com.leave.backend.Entities.UserQuota;
 import com.leave.backend.Exceptions.LeaveQuotaNotFoundException;
+import com.leave.backend.Exceptions.LeaveRequestNotFoundException;
 import com.leave.backend.Repositories.LeaveQuotaRepository;
 import com.leave.backend.Repositories.UserQuotaRepository;
 import com.leave.backend.Repositories.UserRepository;
@@ -108,6 +109,11 @@ public class LeaveQuotaServiceImpl implements LeaveQuotaService{
 
     //     return newQuota;
     // }
+@Override
+    public LeaveQuota getLeaveQuotaByPays(String pays) {
+        return leaveQuotaRepository.findByPays(pays)
+                .orElseThrow(() -> new RuntimeException("Erreur : le quota de congé n'a pas été trouvé pour le pays " + pays));
+    }
     @Override
     public LeaveQuota createLeaveQuota(String name, double quota, String pays) {
         // Créer un nouveau quota

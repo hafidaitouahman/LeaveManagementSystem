@@ -1,23 +1,24 @@
-<div>
-    <h2>User List</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{ user.username }}</td>
-          <td>{{ user.email }}</td>
-          <td>
-            
-            <button (click)="viewUserDetails(user.id)">View Details</button>
-            <button (click)="updateUser(user.id)">Update</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<h2>Liste des Utilisateurs</h2>
+<button mat-raised-button color="accent" (click)="openCreateEventModal()">Create</button>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Utilisateur</th>
+      <th>Site</th>
+      <th>Action</th> <!-- Ajout de la colonne Action -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.username }} - {{ user.teamName }}</td>
+      <td>{{ user.siteName }}</td>
+      <td>
+        <!-- Ajout du bouton Modifier avec l'appel à une fonction d'édition -->
+        <!-- <button mat-raised-button color="primary" (click)="openEditUserModal(user.id)">Modifier</button> -->
+        <button mat-raised-button color="primary" (click)="openUpdateUserPage(user.id)">Modifier</button>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
