@@ -13,6 +13,12 @@ export class LeaveRequestService {
   private baseUrl = 'http://localhost:8080/api/leaverequests'; // Remplacez par l'URL de votre backend
 
   constructor(private http: HttpClient) { }
+
+  getLeaveRequestsByUserId(leaveRequestId: number): Observable<leaveRequestDetails> {
+    const url = `${this.baseUrl}/histo/${leaveRequestId}`;
+    return this.http.get<leaveRequestDetails>(url);
+  }
+
   getPendingLeaveRequestsByUserId(userId: number): Observable<pendingLeaveRequests[]> {
     return this.http.get<pendingLeaveRequests[]>(` ${this.baseUrl}/pending/${userId}`);
   }

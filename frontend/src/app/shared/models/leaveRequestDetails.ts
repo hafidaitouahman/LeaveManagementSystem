@@ -8,6 +8,7 @@ export class leaveRequestDetails {
     leaveTypeName!: string;
     userId!: number;
     username!: string;
-    startDate!: Date;
-    endDate!: Date;
-    duration!: number;}
+    from!: Date;
+    to!: Date;
+    duration!: number;
+}

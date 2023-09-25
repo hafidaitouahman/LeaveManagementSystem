@@ -1,0 +1,31 @@
+.user-profile {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .user-details,
+  .user-quota,
+  .leave-requests {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    width: 30%;
+  }
+  
+  .user-details {
+    background-color: #f0f0f0;
+  }
+  
+  .user-quota {
+    background-color: #e0e0e0;
+  }
+  
+  .leave-requests {
+    background-color: #d0d0d0;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  

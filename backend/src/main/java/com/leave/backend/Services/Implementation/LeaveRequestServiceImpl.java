@@ -256,6 +256,8 @@ public LeaveRequestDTOResponse updateLeaveRequest(Long userId, Long leaveRequest
 
     // Create a response DTO
     LeaveRequestDTOResponse responseDTO = new LeaveRequestDTOResponse();
+
+    responseDTO.setId(leaveRequestId);
     responseDTO.setFrom(newStartDate);
     responseDTO.setTo(newEndDate);
     responseDTO.setDuration(newDuration);
@@ -327,6 +329,7 @@ public LeaveRequestDTOResponse createLeaveRequest(LeaveRequestCreationDTO reques
 
     // Create a response DTO
     LeaveRequestDTOResponse responseDTO = new LeaveRequestDTOResponse();
+    responseDTO.setId(savedLeaveRequest.getId());
     responseDTO.setFrom(startDate);
     responseDTO.setTo(endDate);
     responseDTO.setDuration(duration);

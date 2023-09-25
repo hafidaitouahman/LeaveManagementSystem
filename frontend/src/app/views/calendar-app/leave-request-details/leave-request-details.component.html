@@ -5,11 +5,15 @@
       <strong>ID :</strong> {{ leaveRequest.id }}
     </div>
     <div>
-      <strong>Date de début :</strong> {{ leaveRequest.startDate | date }}
+      <strong>Date de début :</strong> {{ leaveRequest.from | date: 'dd/MM/yyyy' }}
     </div>
     <div>
-      <strong>Date de fin :</strong> {{ leaveRequest.endDate | date }}
+      <strong>Date de fin :</strong> {{ leaveRequest.to | date: 'dd/MM/yyyy' }}
     </div>
+    <div>
+      <strong>Date de création :</strong> {{ leaveRequest.creDate | date:"MMM dd, yyyy 'at' hh:mm a" }}
+    </div>
+    
     <div>
       <strong>Durée :</strong> {{ leaveRequest.duration }} jours
     </div>
@@ -32,9 +36,7 @@
     <div>
       <strong>Statut :</strong> {{ leaveRequest.status }}
     </div>
-    <div>
-      <strong>Date de création :</strong> {{ leaveRequest.creDate | date }}
-    </div>
+    
     <hr>
     <button class="btn btn-primary">Modifier</button>
     <button class="btn btn-danger">Supprimer</button>

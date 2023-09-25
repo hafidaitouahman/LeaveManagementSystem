@@ -1,0 +1,38 @@
+<div class="user-profile">
+    <div class="user-details">
+      <h2>Informations de l'utilisateur</h2>
+      <!-- Affichez ici les détails de l'utilisateur -->
+      <p>Nom d'utilisateur: {{ userDetails.username }}</p>
+      <p>Email d'utilisateur: {{ userDetails.email }}</p>
+      <p>Pays d'utilisateur: {{ userDetails.pays }}</p>
+      <p>Departement d'utilisateur: {{ userDetails.departementName }}</p>
+      <p>Site d'utilisateur: {{ userDetails.siteName }}</p>
+      <p>Equipe d'utilisateur: {{ userDetails.teamName }}</p>
+      <p>Date d'embauche d'utilisateur: {{ userDetails.hirDate | date }} </p>
+      <!-- Ajoutez d'autres champs ici -->
+    </div>
+  
+    <div class="user-quota">
+      <h2>Quotas de l'utilisateur</h2>
+      <!-- Affichez ici les quotas de l'utilisateur -->
+      <li *ngFor="let userQuota of userQuota">
+      <p>Année: {{ userQuota.year }}</p>
+      <p>Quota: {{ userQuota.quota }}</p>
+      <p>Résiduel: {{ userQuota.residuel }}</p>
+      </li>
+    </div>
+  
+    <div class="leave-requests">
+      <h2>Demandes de congé de l'utilisateur</h2>
+      <!-- Affichez ici les demandes de congé de l'utilisateur -->
+      <ul>
+        <li *ngFor="let request of leaveRequests">
+          <p>Type de congé: {{ request.leaveTypeName }}</p>
+          <p>Date de début: {{ request.from }}</p>
+          <p>Date de fin: {{ request.to }}</p>
+          <p>Statut: {{ request.status }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/user.module'; // Import your User model
 import { UserDetails } from 'src/app/shared/models/userDetails.module';
 import { UpdateUserForm } from 'src/app/shared/models/UpdateUserForm.module';
+import { UserQuota } from 'src/app/shared/models/UserQuota.module';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,17 @@ import { UpdateUserForm } from 'src/app/shared/models/UpdateUserForm.module';
 export class UserService {
 
   private baseUrl = 'http://localhost:8080/api/users';
-
+  private quotaUrl = 'http://localhost:8080/api/userquota';
   constructor(private http: HttpClient) { }
 
+  getQuotaAndResidualForCurrentUser(): Observable<UserQuota[]> {
+    const url = `${this.quotaUrl}/quota`; // Remplacez '/user/${userId}/quota' par l'URL appropriée de votre API
+    return this.http.get<UserQuota[]>(url);
+  }
+  getUserQuota(userId: number): Observable<UserQuota> {
+    const url = `${this.quotaUrl}/${userId}`; // Remplacez '/user/${userId}/quota' par l'URL appropriée de votre API
+    return this.http.get<UserQuota>(url);
+  }
   getUserById(userId: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${userId}`);
   }

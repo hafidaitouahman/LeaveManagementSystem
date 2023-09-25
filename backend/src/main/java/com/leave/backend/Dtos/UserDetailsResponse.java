@@ -18,6 +18,8 @@ public class UserDetailsResponse {
     private boolean active;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date hirDate;
+    private double quota;
+    private double residuel;
 
     // Getters et setters pour chaque attribut
     // ...

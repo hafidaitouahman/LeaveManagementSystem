@@ -28,10 +28,13 @@ export class UserListComponent implements OnInit {
       this.users = users;
     });
   }
-
+  openDetailsUserPage(userId: number) {
+    // Redirigez vers la page de profil de l'utilisateur avec l'ID spécifié
+    this.router.navigate(['profile', userId]); // Remplacez 'profile' par l'URL de votre page de profil
+  }
   viewUserDetails(userId: number) {
     // Naviguer vers la page de détails de l'utilisateur en utilisant une route relative
-    this.router.navigate(['user', userId], { relativeTo: this.route });
+    this.router.navigate(['user', userId]);
   }
   openCreateEventModal(): void {
     const modalRef = this.modal.open(CreateUserComponent);

@@ -9,6 +9,9 @@ import { LeaveRequestService } from 'src/app/views/calendar-app/leave-request.se
 import { MatDialog } from '@angular/material/dialog';
 import { LeaveRequestDetailsComponent } from 'src/app/views/calendar-app/leave-request-details/leave-request-details.component';
 import { LeaveRequestDTOResponse } from '../../models/LeaveRequestDTOResponse';
+import { leaveRequestDetails } from '../../models/leaveRequestDetails';
+import { UserService } from 'src/app/views/user-view/user.service';
+import { UserQuota } from '../../models/UserQuota.module';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -24,10 +27,12 @@ export class SidebarComponent implements OnInit {
   currentUser: any;
   userId!: number; // L'ID de l'utilisateur authentifié
   leaveRequests!: pendingLeaveRequests[];
+  leaveRequest!: leaveRequestDetails; // Déclaration de la propriété leaveRequest
+  userQuotas: UserQuota[] = [];
 
   constructor(
     private sidebarService: SidebarService, private router: Router,
-    private storageService: StorageService,private leaveRequestService: LeaveRequestService,public dialog: MatDialog
+    private storageService: StorageService,private leaveRequestService: LeaveRequestService,public dialog: MatDialog,public userService:UserService
   ) { 
     
 
@@ -55,8 +60,19 @@ export class SidebarComponent implements OnInit {
 
       this.userId = this.currentUser.id;
       this.loadPendingLeaveRequests();
+      this.getQuotaAndResidualForCurrentUser();
 
 
+  }
+  getQuotaAndResidualForCurrentUser() {
+    this.userService.getQuotaAndResidualForCurrentUser().subscribe(
+      (userQuotas) => {
+        this.userQuotas = userQuotas;
+      },
+      (error) => {
+        console.error('Erreur:', error);
+      }
+    );
   }
   // openLeaveRequestDetails(leaveRequestId: number) {
   //   // Utilisez l'ID de la demande de congé pour afficher ses détails ou effectuer d'autres opérations
@@ -78,7 +94,7 @@ export class SidebarComponent implements OnInit {
     
     // Utilisez la fonction getLeaveRequestById pour récupérer les détails de la demande de congé par son ID
     this.leaveRequestService.getLeaveRequestById(leaveRequestId).subscribe(
-      (leaveRequest: LeaveRequestDTOResponse) => {
+      (leaveRequest: leaveRequestDetails) => {
         // Ouvrez une fenêtre contextuelle et transmettez les détails de la demande de congé
         const dialogRef = this.dialog.open(LeaveRequestDetailsComponent, {
           width: '400px', // Ajustez la largeur selon vos besoins

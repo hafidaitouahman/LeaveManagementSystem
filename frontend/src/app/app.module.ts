@@ -52,6 +52,8 @@ import { LeaverequestListComponent } from './views/leaveRequest-view/leavereques
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { CreateUserComponent } from './views/user-view/create-user/create-user.component';
+import { ProfileUserComponent } from './views/profile-view/profile-user/profile-user.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -89,6 +91,7 @@ import { CreateUserComponent } from './views/user-view/create-user/create-user.c
     LeaveRequestDetailsComponent,
     LeaverequestListComponent,
     CreateUserComponent,
+    ProfileUserComponent,
   ],
   imports: [
     MatIconModule,
@@ -113,7 +116,7 @@ import { CreateUserComponent } from './views/user-view/create-user/create-user.c
     
 
   ],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,6 +7,9 @@ import { UpdateUserForm } from 'src/app/shared/models/UpdateUserForm.module';
 import { Site } from 'src/app/shared/models/site.module';
 import { Team } from 'src/app/shared/models/team.module';
 import { Departement } from 'src/app/shared/models/departement.module';
+import { SiteService } from '../../site-view/site.service';
+import { DepartementService } from '../../departement-view/departement.service';
+import { TeamService } from '../../team-view/team.service';
 
 
 @Component({
@@ -17,7 +20,7 @@ import { Departement } from 'src/app/shared/models/departement.module';
 export class UpdateUserComponent implements OnInit {
   updateUserForm: FormGroup;
   userId!: number;
-  currentUser!: UserDetails; // Ajoutez cette propriété pour stocker les données de l'utilisateur actuel
+  currentUser!: UpdateUserForm; // Ajoutez cette propriété pour stocker les données de l'utilisateur actuel
   sites: Site[] = [];
   teams: Team[] = [];
   departements: Departement[] = [];
@@ -25,7 +28,10 @@ export class UpdateUserComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private updateUserService: UserService
+    private updateUserService: UserService,
+    private siteService:SiteService,
+    private teamService:TeamService
+    ,private departementService: DepartementService
   ) {
     this.updateUserForm = this.formBuilder.group({
       username: '',
@@ -36,6 +42,9 @@ export class UpdateUserComponent implements OnInit {
       siteId: '',
       quota: '',
       residuel: '',
+      departementName:'',
+      teamName:'',
+      siteName:''
       // Ajoutez d'autres champs du formulaire
     });
   }
@@ -46,6 +55,17 @@ export class UpdateUserComponent implements OnInit {
 
       // Chargez les données de l'utilisateur actuel à partir du service ou de l'API
       this.loadCurrentUser();
+    });
+    this.siteService.getSitesList().subscribe((data) => {
+      this.sites = data;
+    });
+  
+    this.teamService.getTeamsList().subscribe((data) => {
+      this.teams = data;
+    });
+  
+    this.departementService.getDepartementsList().subscribe((data) => {
+      this.departements = data;
     });
   }
 
@@ -61,11 +81,14 @@ export class UpdateUserComponent implements OnInit {
           username: this.currentUser.username,
           email: this.currentUser.email,
           hirDate: this.currentUser.hirDate,
-          departementId: this.currentUser.departementName,
-          teamId: this.currentUser.teamName,
-          siteId: this.currentUser.siteName,
-          // quota: this.currentUser.quota,
-          // residuel: this.currentUser.residuel,
+          departementId: this.currentUser.departementId,
+          teamId: this.currentUser.teamId,
+          siteId: this.currentUser.siteId,
+          quota: this.currentUser.quota,
+          residuel: this.currentUser.residuel,
+            departementName: this.currentUser.currentDepartementName, // Ajoutez ces lignes
+  teamName: this.currentUser.currentTeamName,
+  siteName: this.currentUser.currentSiteName,
         });
       },
       (error) => {

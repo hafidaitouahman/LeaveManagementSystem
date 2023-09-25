@@ -35,7 +35,19 @@
 
 <div class="sidebar_menu" [@onSideNavChange]="sidebarState" *ngIf="showUserBoard">
   <!-- Votre menu utilisateur ici -->
-
+  <div class="leave-requests">
+    <h5>Quotas</h5>
+    <a>
+      <li *ngFor="let quota of userQuotas" class="leave-request">
+        <div class="leave-request-details" >
+          <div class="leave-request-details d-flex justify-content-between">
+          <p class="leave-type">{{ quota.year }}</p>
+          </div>
+          <p class="date-range">{{ quota.residuel}} / {{ quota.quota }}</p>
+        </div>
+      </li>
+    </a>
+  </div>
   <div class="leave-requests">
     <h5>Demandes en attente</h5>
     <a>

@@ -59,24 +59,41 @@
     <label for="hirDate">Date d'embauche</label>
     <input type="date" id="hirDate" formControlName="hirDate" class="form-control">
   </div>
+  <!-- <div class="form-group">
+    <label for="departementId">Département</label>
+    <select id="departementId" formControlName="departementId" class="form-control">
+      <option value="{{ currentUser.departementId }}">{{ currentUser.currentDepartementName }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="teamId">Équipe</label>
+    <select id="teamId" formControlName="teamId" class="form-control">
+      <option value="{{ currentUser.teamId }}">{{ currentUser.currentTeamName }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="siteId">Site</label>
+    <select id="siteId" formControlName="siteId" class="form-control">
+      <option value="{{ currentUser.siteId }}">{{ currentUser.currentSiteName }}</option>
+    </select>
+  </div> -->
+  
+
   <div class="form-group">
     <label for="departementId">Département</label>
     <select id="departementId" formControlName="departementId" class="form-control">
-      <!-- Utilisez *ngFor pour générer les options à partir des données disponibles -->
       <option *ngFor="let departement of departements" [value]="departement.id">{{ departement.name }}</option>
     </select>
   </div>
   <div class="form-group">
     <label for="teamId">Équipe</label>
     <select id="teamId" formControlName="teamId" class="form-control">
-      <!-- Utilisez *ngFor pour générer les options à partir des données disponibles -->
       <option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</option>
     </select>
   </div>
   <div class="form-group">
     <label for="siteId">Site</label>
     <select id="siteId" formControlName="siteId" class="form-control">
-      <!-- Utilisez *ngFor pour générer les options à partir des données disponibles -->
       <option *ngFor="let site of sites" [value]="site.id">{{ site.name }}</option>
     </select>
   </div>

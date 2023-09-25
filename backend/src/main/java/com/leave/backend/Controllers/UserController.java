@@ -243,10 +243,41 @@ userDetailsResponse.setDepartementName(departementName);
 userDetailsResponse.setTeamName(teamName);
 userDetailsResponse.setSiteName(siteName);
 userDetailsResponse.setHirDate(user.getHirDate()); // Définissez hirDate
-
+userDetailsResponse.setQuota(userQuota.getQuota());
+userDetailsResponse.setResiduel(userQuota.getResiduel());
 
 return ResponseEntity.ok(userDetailsResponse);
 }
+// @GetMapping("/{userId}")
+// public ResponseEntity<?> getUserById(@PathVariable Long userId) {
+//     // Recherchez l'utilisateur par son ID dans la base de données
+//     Optional<User> userOptional = userRepository.findById(userId);
+
+//     if (!userOptional.isPresent()) {
+//         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse("Utilisateur non trouvé avec l'ID : " + userId));
+//     }
+
+//     User user = userOptional.get();
+
+//     // Récupérez les informations détaillées de l'utilisateur (y compris le nom du département, de l'équipe et du site)
+//     String departementName = user.getDepartement() != null ? user.getDepartement().getName() : "";
+//     String teamName = user.getTeam() != null ? user.getTeam().getName() : "";
+//     String siteName = user.getSite() != null ? user.getSite().getName() : "";
+
+//     // Créez une instance de UserDetailsResponse avec les informations détaillées de l'utilisateur
+//     UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
+//     userDetailsResponse.setId(user.getId());
+//     userDetailsResponse.setUsername(user.getUsername());
+//     userDetailsResponse.setEmail(user.getEmail());
+//     userDetailsResponse.setPays(user.getPays());
+//     userDetailsResponse.setDepartementName(departementName);
+//     userDetailsResponse.setTeamName(teamName);
+//     userDetailsResponse.setSiteName(siteName);
+//     userDetailsResponse.setHirDate(user.getHirDate()); // Définissez hirDate
+
+
+//     return ResponseEntity.ok(userDetailsResponse);
+// }
 @GetMapping("/{userId}")
 public ResponseEntity<?> getUserById(@PathVariable Long userId) {
     // Recherchez l'utilisateur par son ID dans la base de données
@@ -262,6 +293,10 @@ public ResponseEntity<?> getUserById(@PathVariable Long userId) {
     String departementName = user.getDepartement() != null ? user.getDepartement().getName() : "";
     String teamName = user.getTeam() != null ? user.getTeam().getName() : "";
     String siteName = user.getSite() != null ? user.getSite().getName() : "";
+    int currentYear = LocalDate.now().getYear();
+
+    // Récupérez le quota et le résiduel de congé pour l'utilisateur
+    UserQuota userQuota = userQuotaRepository.findByUserIdAndYear(userId,currentYear);
 
     // Créez une instance de UserDetailsResponse avec les informations détaillées de l'utilisateur
     UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
@@ -272,11 +307,17 @@ public ResponseEntity<?> getUserById(@PathVariable Long userId) {
     userDetailsResponse.setDepartementName(departementName);
     userDetailsResponse.setTeamName(teamName);
     userDetailsResponse.setSiteName(siteName);
-    userDetailsResponse.setHirDate(user.getHirDate()); // Définissez hirDate
-
+    userDetailsResponse.setHirDate(user.getHirDate());
+    
+    // Ajoutez les informations de quota et residuel à UserDetailsResponse
+    if (userQuota != null) {
+        userDetailsResponse.setQuota(userQuota.getQuota());
+        userDetailsResponse.setResiduel(userQuota.getResiduel());
+    }
 
     return ResponseEntity.ok(userDetailsResponse);
 }
+
 @GetMapping("/all")
 public ResponseEntity<List<UserDetailsResponse>> getAllUsers() {
     List<User> users = userRepository.findAll();

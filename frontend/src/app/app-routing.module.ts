@@ -20,6 +20,7 @@ import { UpdateUserComponent } from './views/user-view/update-user/update-user.c
 import { QuotaListComponent } from './views/quota-view/quota-list/quota-list.component';
 import { UserDashboardComponent } from './views/user-dashboard/user-dashboard.component';
 import { LeaverequestListComponent } from './views/leaveRequest-view/leaverequest-list/leaverequest-list.component';
+import { ProfileUserComponent } from './views/profile-view/profile-user/profile-user.component';
 const routes: Routes = [
   //{ path: '', redirectTo: 'login', pathMatch: 'full' },
   
@@ -50,8 +51,12 @@ const routes: Routes = [
   {
     path: 'user/:id/update',
     component: UpdateUserComponent
-  }
+  },
 
+  {
+    path: 'profile/:id', // Utilisez un paramètre dynamique ':id' pour l'ID de l'utilisateur
+    component: ProfileUserComponent
+  }
 
 ];
 
