@@ -57,8 +57,32 @@ Ce projet est une application de gestion des absences qui permet de suivre et de
 
 ## Configuration et Installation
 
-### Cloner le Répertoire :
+### Cloner le Répertoire Backend:
 
 ```bash
 git clone https://gitlab.com/salmamouayad/myapp.git
 cd myapp
+
+  ```
+
+### Build and Run the Application:
+   ```
+   mvn spring-boot:run
+   ```
+
+### Accéder à l'Application :
+
+L'application sera accessible à l'adresse `http://localhost:8080`.
+
+### Construire et Exécuter l'Application (Frontend - Angular) :
+```bash
+cd frontend
+ng serve
+  ```
+### Accéder à l'Application :
+
+L'application sera accessible à l'adresse http://localhost:4200 dans votre navigateur web.
+
+### Sécurité et JWT
+L'application utilise JSON Web Tokens (JWT) pour l'authentification et l'autorisation sécurisées. Lorsqu'un employé s'authentifie avec succès, un jeton JWT est émis, contenant les informations de l'employé et les autorisations d'accès. Ce jeton est inclus dans les en-têtes des requêtes pour les appels API ultérieurs.
+
