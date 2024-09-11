@@ -101,7 +101,6 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     MatSlideToggleModule,
     SharedModule,
     SharedMaterialModule,
