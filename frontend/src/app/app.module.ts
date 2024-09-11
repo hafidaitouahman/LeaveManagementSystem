@@ -20,7 +20,7 @@ import { OrganisationDetailsComponent } from './views/organisation-view/organisa
 import { OrganisationListComponent } from './views/organisation-view/organisation-list/organisation-list.component';
 import { CreateLeaveTypeComponent } from './views/leaveType-view/create-leave-type/create-leave-type.component';
 import { LeaveTypeListComponent } from './views/leaveType-view/leave-type-list/leave-type-list.component';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { UpdateLeaveTypeComponent } from './views/leaveType-view/update-leave-type/update-leave-type.component'
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { SidebarService } from './shared/sevices/sidebar.service';
@@ -55,67 +55,57 @@ import { CreateUserComponent } from './views/user-view/create-user/create-user.c
 import { ProfileUserComponent } from './views/profile-view/profile-user/profile-user.component';
 import { DatePipe } from '@angular/common';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    CalendarAppComponent,
-    SidenavBarComponent,
-    CalendarFormDialogComponent,
-    CreateOrganisationComponent,
-    OrganisationDetailsComponent,
-    OrganisationListComponent,
-    CreateLeaveTypeComponent,
-    LeaveTypeListComponent,
-    UpdateLeaveTypeComponent,
-    CreateDepartementComponent,
-    UpdateDepartementComponent,
-    DepartementListComponent,
-    CreateTeamComponent,
-    UpdateTeamComponent,
-    TeamListComponent,
-    CreateSiteComponent,
-    UpdateSiteComponent,
-    SiteListComponent,
-    LoginComponent,
-    RegistrationComponent,
-    ProfileComponent,
-    RhDashboardComponent,
-    HolidaysComponent,
-    UserListComponent,
-    UserDetailsComponent,
-    UpdateUserComponent,
-    QuotaListComponent,
-    CreateQuotaComponent,
-    UpdateQuotaComponent,
-    UserDashboardComponent,
-    LeaveRequestDetailsComponent,
-    LeaverequestListComponent,
-    CreateUserComponent,
-    ProfileUserComponent,
-  ],
-  imports: [
-    MatIconModule,
-    MatPaginatorModule,
-    BrowserAnimationsModule, // Add BrowserAnimationsModule
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserModule,
-    AppRoutingModule,
-    MatSlideToggleModule,
-    SharedModule,
-    SharedMaterialModule,
-    FormsModule,
-    NgbModalModule,
-    FlatpickrModule.forRoot(),
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
-
-    
-
-  ],
-  providers: [httpInterceptorProviders,DatePipe],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        CalendarAppComponent,
+        SidenavBarComponent,
+        CalendarFormDialogComponent,
+        CreateOrganisationComponent,
+        OrganisationDetailsComponent,
+        OrganisationListComponent,
+        CreateLeaveTypeComponent,
+        LeaveTypeListComponent,
+        UpdateLeaveTypeComponent,
+        CreateDepartementComponent,
+        UpdateDepartementComponent,
+        DepartementListComponent,
+        CreateTeamComponent,
+        UpdateTeamComponent,
+        TeamListComponent,
+        CreateSiteComponent,
+        UpdateSiteComponent,
+        SiteListComponent,
+        LoginComponent,
+        RegistrationComponent,
+        ProfileComponent,
+        RhDashboardComponent,
+        HolidaysComponent,
+        UserListComponent,
+        UserDetailsComponent,
+        UpdateUserComponent,
+        QuotaListComponent,
+        CreateQuotaComponent,
+        UpdateQuotaComponent,
+        UserDashboardComponent,
+        LeaveRequestDetailsComponent,
+        LeaverequestListComponent,
+        CreateUserComponent,
+        ProfileUserComponent,
+    ],
+    bootstrap: [AppComponent], imports: [MatIconModule,
+        MatPaginatorModule,
+        BrowserAnimationsModule, // Add BrowserAnimationsModule
+        ReactiveFormsModule,
+        BrowserModule,
+        AppRoutingModule,
+        MatSlideToggleModule,
+        SharedModule,
+        SharedMaterialModule,
+        FormsModule,
+        NgbModalModule,
+        FlatpickrModule.forRoot(),
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory,
+        })], providers: [httpInterceptorProviders, DatePipe, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
